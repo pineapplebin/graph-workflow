@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button } from '@dui'
 import styles from './App.module.css'
 
 function App() {
@@ -8,9 +9,12 @@ function App() {
     <>
       <h1>Vite + React</h1>
       <div className={styles.card}>
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button flexGrow={true} onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
+        <Button disabled onClick={() => window.bridge.darkMode.toggle()}>
+          change dark mode
+        </Button>
       </div>
     </>
   )

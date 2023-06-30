@@ -1,3 +1,4 @@
 .card {
-  color: red;
+  width: 100vw;
+  display: flex;
 }

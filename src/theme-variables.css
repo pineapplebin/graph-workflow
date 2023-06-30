@@ -1,0 +1,18 @@
+:root {
+  --primary-color: #65b0f5;
+
+  --font-color: #dcdcdc;
+  --background-color: #21262d;
+  --background-active-color: #434953;
+
+  --disable-color: #2a303a;
+  --disable-font-color: #6b7076;
+
+  --border-radius: 2px;
+  /* --shadow-box:  */
+}
+
+@media (prefers-color-scheme: light) {
+  /* :root {
+  } */
+}
