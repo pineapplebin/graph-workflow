@@ -22,9 +22,7 @@
 
     /* Alias */
     "paths": {
-      "@/*": ["./src/*"],
-      "@dui": ["./src/desktop-ui"],
-      "@dui/*": ["./src/desktop-ui/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "electron"],

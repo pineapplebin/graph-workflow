@@ -1,5 +1,5 @@
 import { type FC, type CSSProperties, useMemo } from 'react'
-import { useMergeStyle } from '@dui'
+import { useMergeStyle } from '@/desktop-ui'
 
 import cx from 'classnames'
 import styles from './flex.module.css'

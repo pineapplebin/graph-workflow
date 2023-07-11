@@ -9,7 +9,7 @@
   --disable-font-color: #6b7076;
 
   --border-radius: 2px;
-  /* --shadow-box:  */
+  --normal-gap: 8px;
 }
 
 @media (prefers-color-scheme: light) {

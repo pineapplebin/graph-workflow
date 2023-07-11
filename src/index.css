@@ -7,7 +7,7 @@
 
   color-scheme: light dark;
   color: var(--font-color);
-  background-color: #303540;
+  background-color: #1b1f24;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,6 +20,7 @@ html {
   box-sizing: border-box;
   font-size: 62.5%; /* 10px */
 }
+
 *,
 *::before,
 *::after {
@@ -30,13 +31,10 @@ html {
 
 body {
   /* boxing */
+  padding: var(--normal-gap);
   margin: 0;
   width: 100vw;
   height: 100vh;
-  /* layout */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   /* font */
   font-size: 1.6rem;
 }

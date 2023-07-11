@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, HTMLProps } from 'react'
-import { asFlexItem } from '@dui'
+import { asFlexItem } from '@/desktop-ui'
 import cx from 'classnames'
 
 import styles from './index.module.css'
