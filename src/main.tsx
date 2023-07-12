@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
+import '@/desktop-ui'
 import App from './App.tsx'
 import './index.css'
 
@@ -11,7 +13,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 postMessage({ payload: 'removeLoading' }, '*')
 
-const themeMode = await window.bridge.darkMode.getCurrentMode()
-if (themeMode === 'light') {
-  window.bridge.darkMode.toggle()
-}
+window.bridge.darkMode.getCurrentMode().then((themeMode) => {
+  if (themeMode === 'dark') {
+    window.bridge.darkMode.toggle()
+  }
+})

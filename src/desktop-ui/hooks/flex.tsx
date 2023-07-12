@@ -1,11 +1,17 @@
-import { type FC, type CSSProperties, useMemo } from 'react'
-import { useMergeStyle } from '@/desktop-ui'
+import { type FC, useMemo, forwardRef } from 'react'
+import { PropsWithStyling, useMergeStyle } from '@/desktop-ui'
 
 import cx from 'classnames'
 import styles from './flex.module.css'
 
 export interface AsFlexItemProps {
+  /**
+   * 主轴上伸展控制
+   */
   flexGrow?: boolean | number
+  /**
+   * 主轴上收缩控制
+   */
   flexShrink?: boolean | number
 }
 
@@ -46,17 +52,24 @@ export function useAsFlexItem<P extends AsFlexItemProps>({
 /**
  * asFlexItem hoc
  */
-export function asFlexItem<
-  P extends { className?: string; style?: CSSProperties },
->(comp: FC<P>): FC<P & AsFlexItemProps> {
+export function asFlexItem<T extends unknown, P extends PropsWithStyling>(
+  comp: FC<P>,
+) {
   const Comp = comp
 
-  return function (props) {
+  return forwardRef<T, P & AsFlexItemProps>(function (props, ref) {
     const { className, style } = useAsFlexItem(props)
 
     const passedClassName = cx(className, props.className)
     const passedStyle = useMergeStyle(style, props.style)
 
-    return <Comp className={passedClassName} style={passedStyle} {...props} />
-  }
+    return (
+      <Comp
+        ref={ref}
+        className={passedClassName}
+        style={passedStyle}
+        {...props}
+      />
+    )
+  })
 }

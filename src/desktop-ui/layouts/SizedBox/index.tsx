@@ -1,7 +1,7 @@
 import { PropsWithStyling, useMergeStyle } from '@/desktop-ui'
 import { FC, PropsWithChildren } from 'react'
 
-interface SizedBoxProps extends PropsWithStyling, PropsWithChildren {
+export interface SizedBoxProps extends PropsWithStyling, PropsWithChildren {
   width?: number | string
   height?: number | string
 }

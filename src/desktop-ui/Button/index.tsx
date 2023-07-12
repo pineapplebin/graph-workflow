@@ -1,19 +1,27 @@
 import { FC, PropsWithChildren, HTMLProps } from 'react'
-import { asFlexItem } from '@/desktop-ui'
-import cx from 'classnames'
+import { asFlexItem, type PropsWithOnClick } from '@/desktop-ui'
 
+import cx from 'classnames'
 import styles from './index.module.css'
 
 type HTMLButtonElementProps = Pick<
   HTMLProps<HTMLButtonElement>,
-  'className' | 'style' | 'disabled' | 'onClick'
+  'className' | 'style' | 'disabled'
 >
 
-export interface ButtonProps extends HTMLButtonElementProps {}
+export interface ButtonProps
+  extends HTMLButtonElementProps,
+    PropsWithChildren,
+    PropsWithOnClick {}
 
-const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, ...rest }) => {
+const Button: FC<PropsWithChildren<ButtonProps>> = ({
+  className,
+  style,
+  children,
+  ...rest
+}) => {
   return (
-    <button {...rest} className={cx(styles.Button, rest.className)}>
+    <button className={cx(className, styles.Button)} style={style} {...rest}>
       {children}
     </button>
   )

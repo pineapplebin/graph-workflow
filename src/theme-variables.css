@@ -15,8 +15,8 @@
 
   --green-color: #5af07c;
 
-  --border-radius: 2px;
-  --common-gap: 8px;
+  --border-radius: 0.2rem;
+  --common-gap: 0.8rem;
 }
 
 @media (prefers-color-scheme: light) {

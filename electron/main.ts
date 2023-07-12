@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { app, BrowserWindow } from 'electron'
 import { registerHandle as registerDarkModeHandle } from './bridges/dark-mode/main'
+import { registerHandle as registerPersistenceHandle } from './bridges/persistence/main'
 
 // The built directory structure
 //
@@ -68,3 +69,4 @@ app.on('window-all-closed', () => {
  * ----------- bridge -----------
  */
 registerDarkModeHandle()
+registerPersistenceHandle()

@@ -29,6 +29,7 @@ export function usePropsWithDefaults<
 
 /**
  * 合并 style
+ * 如果传入的 style 为 undefined 或者 {}，则会被忽略
  */
 export function useMergeStyle(
   ...styles: (CSSProperties | undefined)[]

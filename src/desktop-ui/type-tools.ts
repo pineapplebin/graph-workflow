@@ -1,6 +1,3 @@
 export type NotUndefined<T> = T extends undefined ? never : T
 
-export interface PropsWithStyling {
-  className?: string
-  style?: React.CSSProperties
-}
+export type ArrayItem<A> = A extends Array<infer T> ? T : never

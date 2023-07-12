@@ -16,6 +16,8 @@
   cursor: pointer;
   /* transition */
   transition: background-color 0.25s, color 0.25s;
+  /* behavior */
+  user-select: none;
 }
 
 .Button:hover {
@@ -34,5 +36,5 @@
 
 .Button:focus,
 .Button:focus-visible {
-  outline: 4px auto var(--primary-color);
+  outline: 0.2rem solid var(--primary-color);
 }

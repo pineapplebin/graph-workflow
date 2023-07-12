@@ -1,5 +1,6 @@
 import { contextBridge } from 'electron'
 import { registerBridge as registerDarkModeBridge } from './bridges/dark-mode/renderer'
+import { registerBridge as registerPersistenceBridge } from './bridges/persistence/renderer'
 
 function domReady(
   condition: DocumentReadyState[] = ['complete', 'interactive'],
@@ -103,5 +104,6 @@ const bridge: any = {}
 
 // dark-mode
 registerDarkModeBridge(bridge)
+registerPersistenceBridge(bridge)
 
 contextBridge.exposeInMainWorld('bridge', bridge)

@@ -11,6 +11,9 @@ import cx from 'classnames'
 import styles from './index.module.css'
 
 interface RowProps extends PropsWithStyling, PropsWithChildren {
+  /**
+   * 主轴对齐方式
+   */
   mainAxisAlignment?: MainAxisAlignment
 }
 

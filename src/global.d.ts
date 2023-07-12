@@ -10,4 +10,7 @@ export declare interface ElectronBridge {
     toggle: () => Promise<unknown>
     system: () => Promise<unknown>
   }
+  persistence: {
+    getAppDataPath: () => Promise<string>
+  }
 }
