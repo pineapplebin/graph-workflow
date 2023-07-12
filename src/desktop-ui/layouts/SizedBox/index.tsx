@@ -1,9 +1,9 @@
-import { PropsWithStyling, asFlexItem, useMergeStyle } from '@/desktop-ui'
+import { PropsWithStyling, useMergeStyle } from '@/desktop-ui'
 import { FC, PropsWithChildren } from 'react'
 
 interface SizedBoxProps extends PropsWithStyling, PropsWithChildren {
-  width?: number
-  height?: number
+  width?: number | string
+  height?: number | string
 }
 
 const SizedBox: FC<SizedBoxProps> = ({
@@ -26,4 +26,4 @@ const SizedBox: FC<SizedBoxProps> = ({
   )
 }
 
-export default asFlexItem(SizedBox)
+export default SizedBox

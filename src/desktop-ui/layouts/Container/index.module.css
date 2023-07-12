@@ -1,0 +1,26 @@
+.Container {
+  display: flex;
+}
+
+.Scrollable {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.Scrollable::-webkit-scrollbar {
+  width: 6px;
+  background-color: #2e3137;
+}
+
+.Scrollable::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+.Scrollable::-webkit-scrollbar-thumb {
+  background-color: #64676b;
+  border-radius: 4px;
+}
+
+.Scrollable::-webkit-scrollbar-corner {
+  display: none;
+}

@@ -7,3 +7,10 @@ export function getCSSVariable(name: string): string {
     ''
   )
 }
+
+/**
+ * 常用的 CSS 变量
+ */
+export const STYLING = {
+  normalGap: getCSSVariable('common-gap'),
+}

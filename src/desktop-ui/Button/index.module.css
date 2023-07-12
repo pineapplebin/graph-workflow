@@ -1,24 +1,25 @@
 .Button {
   /* layout */
   display: inline-flex;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
   /* font */
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   /* outlook */
-  color: var(--font-color);
+  color: var(--white-color);
   border: none;
   border-radius: var(--border-radius);
   padding: 0.5rem 1.5rem;
-  background-color: var(--background-color);
+  background-color: var(--grey-color);
   cursor: pointer;
   /* transition */
   transition: background-color 0.25s, color 0.25s;
 }
 
 .Button:hover {
-  background-color: var(--background-active-color);
+  background-color: var(--grey-color-ultra-lightest);
 }
 
 .Button:active {
@@ -26,8 +27,8 @@
 }
 
 .Button:disabled {
-  background-color: var(--disable-color);
-  color: var(--disable-font-color);
+  background-color: var(--grey-color-light);
+  color: var(--white-color-dark);
   cursor: not-allowed;
 }
 
