@@ -91,13 +91,23 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
       className={cx(className, styles.HSplitContainer)}
       style={style}
     >
-      <Container ref={lChildEl} width={lPanelWidth}>
+      <Container
+        ref={lChildEl}
+        width={lPanelWidth}
+        style={{ willChange: 'width', transition: 'width 0.2s ease-in-out' }}
+        flexGrow
+      >
         {lChild}
       </Container>
       <SizedBox width={STYLING.normalGap}>
         <Grabber onDrag={handleGrabberDrag} />
       </SizedBox>
-      <Container ref={rChildEl} width={rPanelWidth}>
+      <Container
+        ref={rChildEl}
+        width={rPanelWidth}
+        style={{ willChange: 'width', transition: 'width 0.2s ease-in-out' }}
+        flexGrow
+      >
         {rChild}
       </Container>
     </div>
