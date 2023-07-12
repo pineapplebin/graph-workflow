@@ -20,6 +20,14 @@
   user-select: none;
 }
 
+.Light {
+  background-color: var(--grey-color-light);
+}
+
+.Dark {
+  background-color: var(--grey-color-dark);
+}
+
 .Button:hover {
   background-color: var(--grey-color-ultra-lightest);
 }

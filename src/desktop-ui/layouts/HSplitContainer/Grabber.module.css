@@ -5,12 +5,13 @@
   justify-content: center;
   align-items: center;
   cursor: grab;
+  touch-action: pan-x;
 }
 
 .Grabber {
   /* styling */
   width: 0.4rem;
-  height: 60%;
+  height: 6rem;
   border-radius: 0.2rem;
   background-color: var(--white-color-dark);
   /* hide/show */

@@ -13,7 +13,9 @@ type HTMLButtonElementProps = Pick<
 export interface ButtonProps
   extends HTMLButtonElementProps,
     PropsWithChildren,
-    PropsWithOnClick {}
+    PropsWithOnClick {
+  color?: 'light' | 'dark' | undefined
+}
 
 const Button: FC<PropsWithChildren<ButtonProps>> = ({
   className,
@@ -22,7 +24,16 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
   ...rest
 }) => {
   return (
-    <button className={cx(className, styles.Button)} style={style} {...rest}>
+    <button
+      className={cx(
+        className,
+        styles.Button,
+        rest.color === 'light' && styles.Light,
+        rest.color === 'dark' && styles.Dark,
+      )}
+      style={style}
+      {...rest}
+    >
       {children}
     </button>
   )

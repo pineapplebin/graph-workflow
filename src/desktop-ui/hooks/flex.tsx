@@ -1,5 +1,6 @@
 import { type FC, useMemo, forwardRef } from 'react'
-import { PropsWithStyling, useMergeStyle } from '@/desktop-ui'
+import { useMergeStyle } from './with-defaults'
+import type { PropsWithStyling } from '../common-types'
 
 import cx from 'classnames'
 import styles from './flex.module.css'

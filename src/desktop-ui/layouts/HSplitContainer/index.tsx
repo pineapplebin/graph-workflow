@@ -54,16 +54,25 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
   const rChildEl = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    console.log(containerEl, lChildEl, rChildEl)
     if (!containerEl.current || !lChildEl.current || !rChildEl.current) {
       return
     }
     const lChildWidth = lChildEl.current.getBoundingClientRect().width
     const rChildWidth = rChildEl.current.getBoundingClientRect().width
 
-    console.log(lChildWidth, rChildWidth, '')
-    console.log(setLPanelWidth, setRPanelWidth)
+    setLPanelWidth(lChildWidth)
+    setRPanelWidth(rChildWidth)
   }, [])
+
+  const handleGrabberDrag = (dx: number) => {
+    const intDx = Math.round(dx)
+    if (typeof lPanelWidth === 'number') {
+      setLPanelWidth(lPanelWidth + intDx)
+    }
+    if (typeof rPanelWidth === 'number') {
+      setRPanelWidth(rPanelWidth - intDx)
+    }
+  }
 
   // 处理子元素切割
   const splitResult = useSplitChildren(children)
@@ -86,7 +95,7 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
         {lChild}
       </Container>
       <SizedBox width={STYLING.normalGap}>
-        <Grabber />
+        <Grabber onDrag={handleGrabberDrag} />
       </SizedBox>
       <Container ref={rChildEl} width={rPanelWidth}>
         {rChild}
