@@ -1,5 +1,6 @@
 import { PropsWithChildren, forwardRef } from 'react'
-import { PropsWithStyling, asFlexItem, useMergeStyle } from '@/desktop-ui'
+import { asFlexItem, useMergeStyle } from '../../hooks'
+import { PropsWithStyling } from '../../common-types'
 
 import cx from 'classnames'
 import styles from './index.module.css'

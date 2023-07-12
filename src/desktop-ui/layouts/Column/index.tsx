@@ -1,11 +1,7 @@
 import { type FC, type PropsWithChildren } from 'react'
-import {
-  asFlexItem,
-  MainAxisAlignment,
-  useMergeStyle,
-  type PropsWithStyling,
-  usePropsWithDefaults,
-} from '@/desktop-ui'
+import { asFlexItem, useMergeStyle, usePropsWithDefaults } from '../../hooks'
+import { MainAxisAlignment } from '../../enums'
+import type { PropsWithStyling } from '../../common-types'
 
 import cx from 'classnames'
 import styles from './index.module.css'

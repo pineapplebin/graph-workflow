@@ -1,5 +1,6 @@
-import { PropsWithStyling, useMergeStyle } from '@/desktop-ui'
 import { FC, PropsWithChildren } from 'react'
+import { useMergeStyle } from '../../hooks'
+import type { PropsWithStyling } from '../../common-types'
 
 export interface SizedBoxProps extends PropsWithStyling, PropsWithChildren {
   width?: number | string

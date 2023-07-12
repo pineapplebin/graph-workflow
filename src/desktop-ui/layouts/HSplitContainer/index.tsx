@@ -8,13 +8,12 @@ import {
   ReactNode,
   useLayoutEffect,
 } from 'react'
-import {
-  Container,
-  PropsWithStyling,
-  SizedBox,
-  asFlexItem,
-  usePropsWithDefaults,
-} from '@/desktop-ui'
+
+import Container from '../Container'
+import SizedBox from '../SizedBox'
+import { asFlexItem, usePropsWithDefaults } from '../../hooks'
+
+import type { PropsWithStyling } from '../../common-types'
 import { STYLING } from '@/utils/styling'
 
 import Grabber from './Grabber'

@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren, HTMLProps } from 'react'
-import { asFlexItem, type PropsWithOnClick } from '@/desktop-ui'
+import { asFlexItem } from '../hooks'
+import type { PropsWithOnClick } from '../common-types'
 
 import cx from 'classnames'
 import styles from './index.module.css'
