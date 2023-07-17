@@ -1,17 +1,9 @@
-import {
-  FC,
-  useState,
-  useRef,
-  PropsWithChildren,
-  useMemo,
-  Children,
-  ReactNode,
-  useLayoutEffect,
-} from 'react'
+import { FC, PropsWithChildren, useMemo, Children, ReactNode } from 'react'
 
 import Container from '../Container'
 import SizedBox from '../SizedBox'
 import { asFlexItem, usePropsWithDefaults } from '../../hooks'
+import { useResizeChildren } from './resize'
 
 import type { PropsWithStyling } from '../../common-types'
 import { STYLING } from '@/utils/styling'
@@ -42,37 +34,17 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
     },
   )
 
-  const [lPanelWidth, setLPanelWidth] = useState<number | string>(
+  const {
+    lChildEl,
+    lPanelWidth,
+    rChildEl,
+    rPanelWidth,
+    handleGrabberDrag,
+    handleResizeContainer,
+  } = useResizeChildren({
     initialLPanelWidth,
-  )
-  const [rPanelWidth, setRPanelWidth] = useState<number | string>(
     initialRPanelWidth,
-  )
-
-  const containerEl = useRef<HTMLDivElement>(null)
-  const lChildEl = useRef<HTMLDivElement>(null)
-  const rChildEl = useRef<HTMLDivElement>(null)
-
-  useLayoutEffect(() => {
-    if (!containerEl.current || !lChildEl.current || !rChildEl.current) {
-      return
-    }
-    const lChildWidth = lChildEl.current.getBoundingClientRect().width
-    const rChildWidth = rChildEl.current.getBoundingClientRect().width
-
-    setLPanelWidth(lChildWidth)
-    setRPanelWidth(rChildWidth)
-  }, [])
-
-  const handleGrabberDrag = (dx: number) => {
-    const intDx = Math.round(dx)
-    if (typeof lPanelWidth === 'number') {
-      setLPanelWidth(lPanelWidth + intDx)
-    }
-    if (typeof rPanelWidth === 'number') {
-      setRPanelWidth(rPanelWidth - intDx)
-    }
-  }
+  })
 
   // 处理子元素切割
   const splitResult = useSplitChildren(children)
@@ -87,14 +59,14 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
 
   return (
     <div
-      ref={containerEl}
       className={cx(className, styles.HSplitContainer)}
       style={style}
+      onResize={handleResizeContainer}
     >
       <Container
         ref={lChildEl}
+        className={styles.Panel}
         width={lPanelWidth}
-        style={{ willChange: 'width', transition: 'width 0.2s ease-in-out' }}
         flexGrow
       >
         {lChild}
@@ -104,8 +76,8 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
       </SizedBox>
       <Container
         ref={rChildEl}
+        className={styles.Panel}
         width={rPanelWidth}
-        style={{ willChange: 'width', transition: 'width 0.2s ease-in-out' }}
         flexGrow
       >
         {rChild}

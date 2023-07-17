@@ -1,12 +1,21 @@
-import { Column, Button, Panel, HSplitContainer, SizedBox } from '@/desktop-ui'
+import {
+  Column,
+  Button,
+  Panel,
+  HSplitContainer,
+  SplitContainerPanel,
+  SizedBox,
+} from '@/desktop-ui'
 import { STYLING } from './utils/styling'
 
 function App() {
   return (
     <HSplitContainer>
-      <Column>
-        <Button>left</Button>
-      </Column>
+      <SplitContainerPanel minSize={100} initialSize={100}>
+        <Column>
+          <Button>left</Button>
+        </Column>
+      </SplitContainerPanel>
       <Column>
         <HSplitContainer>
           <Column>
