@@ -138,7 +138,7 @@ export function useResizeChildren({
           {isPanel ? el.props.children : el}
         </Panel>
       )
-    })
+    }) as [ReactElement<PanelProps>, ReactElement<PanelProps>]
   }, [sizes, children, sizePropName])
 
   const handleDrag = useCallback(

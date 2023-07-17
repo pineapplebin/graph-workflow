@@ -1,5 +1,5 @@
-import { PersistentNode } from '@/engines/structs/types'
 import { create } from 'zustand'
+import { PersistentNode } from '@/engines/structs/types'
 
 interface MainPageStore {
   nodes: PersistentNode[]

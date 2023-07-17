@@ -1,8 +1,8 @@
-import { HSplitContainer, SplitContainerPanel } from '@/desktop-ui'
 import { FC, useEffect } from 'react'
+import { HSplitContainer, SplitContainerPanel } from '@/desktop-ui'
 import NodeList from './components/NodeList'
-import { useMainPageStore } from './store'
 import GraphEditor from './components/GraphEditor'
+import { useMainPageStore } from './store'
 
 const MainPage: FC = () => {
   const initialize = useMainPageStore((state) => state.initialize)

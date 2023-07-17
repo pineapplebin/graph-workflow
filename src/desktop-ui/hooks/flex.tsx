@@ -1,4 +1,4 @@
-import { type FC, useMemo, forwardRef } from 'react'
+import { type ComponentType, useMemo, forwardRef } from 'react'
 import { useMergeStyle } from './with-defaults'
 import type { PropsWithStyling } from '../common-types'
 
@@ -54,7 +54,7 @@ export function useAsFlexItem<P extends AsFlexItemProps>({
  * asFlexItem hoc
  */
 export function asFlexItem<T extends unknown, P extends PropsWithStyling>(
-  comp: FC<P>,
+  comp: ComponentType<P>,
 ) {
   const Comp = comp
 
