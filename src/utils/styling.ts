@@ -12,6 +12,7 @@ export function getCSSVariable(name: string): string {
  * 常用的 CSS 变量
  */
 export const STYLING = {
+  smallGap: getCSSVariable('small-gap') || '6px',
   normalGap: getCSSVariable('common-gap') || '8px',
 }
 

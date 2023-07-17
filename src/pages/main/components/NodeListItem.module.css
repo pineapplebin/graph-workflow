@@ -1,0 +1,4 @@
+.NodeListItem {
+  background-color: var(--primary-color-dark);
+  border: 0.1rem solid var(--white-color);
+}

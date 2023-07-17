@@ -29,6 +29,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
+    titleBarStyle: 'hiddenInset',
   })
 
   // Open the DevTools when is development.

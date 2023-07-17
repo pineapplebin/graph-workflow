@@ -1,0 +1,8 @@
+.AppHeader {
+  /* layout */
+  height: 3rem;
+  flex-shrink: 0;
+  /* control */
+  user-select: none;
+  -webkit-app-region: drag;
+}
