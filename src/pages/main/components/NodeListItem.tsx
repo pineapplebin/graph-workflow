@@ -1,8 +1,21 @@
 import { FC } from 'react'
-import { Row } from '@/desktop-ui'
+import { Container, Row } from '@/desktop-ui'
+import { PersistentNode } from '@/engines/structs/types'
 
-const NodeListItem: FC = () => {
-  return <Row></Row>
+import styles from './NodeListItem.module.css'
+
+export interface NodeListItemProps {
+  node: PersistentNode
+}
+
+const NodeListItem: FC<NodeListItemProps> = ({ node }) => {
+  return (
+    <Container className={styles.NodeListItem}>
+      <Row>
+        <span>{node.name}</span>
+      </Row>
+    </Container>
+  )
 }
 
 export default NodeListItem

@@ -1,4 +1,16 @@
 .NodeListItem {
+  padding: 0.2rem 0.4rem;
+  /* control */
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 2rem;
+}
+
+.Active {
   background-color: var(--primary-color-dark);
   border: 0.1rem solid var(--white-color);
+}
+
+.NodeListItem:last-child {
+  margin-bottom: 0;
 }

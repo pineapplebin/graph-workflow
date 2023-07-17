@@ -1,13 +1,14 @@
-import { Column, Row, Container, Panel, TabBar } from '@/desktop-ui'
+import { FC, useMemo } from 'react'
+import { Column, Container, Panel, TabBar } from '@/desktop-ui'
 import { TabOption } from '@/desktop-ui/TabBar'
 import { STYLING } from '@/utils/styling'
-import { FC, useMemo } from 'react'
+import { useMainPageStore } from '../store'
 
 import styles from './NodeList.module.css'
 import NodeListItem from './NodeListItem'
 
 const NodeList: FC = () => {
-  const nodes: unknown[] = []
+  const nodes = useMainPageStore((state) => state.nodes)
 
   const tabs = useMemo<TabOption[]>(() => {
     return [{ key: 0, label: '节点列表' }]
@@ -20,7 +21,7 @@ const NodeList: FC = () => {
         <Container scrollable className={styles.Container}>
           <Column>
             {nodes.map((node) => (
-              <NodeListItem />
+              <NodeListItem key={node.name} node={node} />
             ))}
           </Column>
         </Container>
