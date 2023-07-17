@@ -1,7 +1,6 @@
-import { FC, PropsWithChildren, useMemo } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import type { PropsWithStyling } from '../../common-types'
 import { asFlexItem } from '../../hooks'
-import SizedBox from '../SizedBox'
 
 import { useSplitChildren } from './split'
 import { useResizeChildren } from './resize'
