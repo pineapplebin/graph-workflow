@@ -1,18 +1,20 @@
 import { FC } from 'react'
 import { Container, Row } from '@/desktop-ui'
-import { PersistentNode } from '@/engines/structs/types'
+import { Node } from 'reactflow'
 
 import styles from './NodeListItem.module.css'
 
 export interface NodeListItemProps {
-  node: PersistentNode
+  node: Node
 }
 
 const NodeListItem: FC<NodeListItemProps> = ({ node }) => {
   return (
     <Container className={styles.NodeListItem}>
       <Row>
-        <span>{node.name}</span>
+        <span>
+          {node.id}({node.type})
+        </span>
       </Row>
     </Container>
   )
