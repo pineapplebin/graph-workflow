@@ -1,0 +1,7 @@
+.NodePanel {
+  /* styling */
+  min-width: 24rem;
+  background-color: var(--grey-color-lightest);
+  border-radius: var(--border-radius);
+  padding: var(--small-gap);
+}

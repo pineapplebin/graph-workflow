@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Container } from '@/desktop-ui'
+import { Container, Panel } from '@/desktop-ui'
 import { Background, ReactFlow, ReactFlowProvider } from 'reactflow'
 
 import 'reactflow/dist/style.css'
@@ -23,18 +23,20 @@ const GraphEditor: FC = () => {
 
   return (
     <ReactFlowProvider>
-      <Container className={styles.GraphEditor}>
-        <ReactFlow
-          nodeTypes={nodeTypes}
-          nodes={nodes}
-          edges={edges}
-          proOptions={proOptions}
-          onNodesChange={onNodesChange}
-          nodesDraggable
-        >
-          <Background></Background>
-        </ReactFlow>
-      </Container>
+      <Panel>
+        <Container className={styles.GraphEditor}>
+          <ReactFlow
+            nodeTypes={nodeTypes}
+            nodes={nodes}
+            edges={edges}
+            proOptions={proOptions}
+            onNodesChange={onNodesChange}
+            nodesDraggable
+          >
+            <Background></Background>
+          </ReactFlow>
+        </Container>
+      </Panel>
     </ReactFlowProvider>
   )
 }
