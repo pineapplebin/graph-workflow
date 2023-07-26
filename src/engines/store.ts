@@ -14,6 +14,12 @@ export interface FlowDataState {
   setNodes: (nodes: Node[]) => void
   setEdges: (edges: Edge[]) => void
   updateNodeData: (id: string, data: any) => void
+  reducer: (
+    fn: (
+      set: StoreApi<FlowDataState>['setState'],
+      get: StoreApi<FlowDataState>['getState'],
+    ) => void,
+  ) => void
   // engine related
   startRun: (nodeId: string) => void
 }
@@ -57,6 +63,9 @@ export function useInitialFlow(
             }
             set({ nodes: newNodes })
           }
+        },
+        reducer: (fn) => {
+          fn(set, get)
         },
         // engine related
         startRun: (nodeId) => {

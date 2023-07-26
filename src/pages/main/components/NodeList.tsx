@@ -8,9 +8,9 @@ import NodeListItem from './NodeListItem'
 import styles from './NodeList.module.css'
 
 const NodeList: FC = () => {
-  const { nodes, onNodesChange } = useGetFlow((state) => ({
+  const { nodes, reducer } = useGetFlow((state) => ({
     nodes: state.nodes,
-    onNodesChange: state.onNodesChange,
+    reducer: state.reducer,
   }))
 
   const tabs = useMemo<TabOption[]>(() => {
@@ -19,15 +19,16 @@ const NodeList: FC = () => {
 
   const handleClickItem = useCallback(
     (nodeId: string) => {
-      onNodesChange(
-        nodes.map((node) => ({
-          id: node.id,
-          type: 'select',
-          selected: node.id === nodeId,
-        })),
-      )
+      reducer((set) => {
+        set({
+          nodes: nodes.map((node) => ({
+            ...node,
+            selected: node.id === nodeId,
+          })),
+        })
+      })
     },
-    [nodes, onNodesChange],
+    [nodes, reducer],
   )
 
   return (

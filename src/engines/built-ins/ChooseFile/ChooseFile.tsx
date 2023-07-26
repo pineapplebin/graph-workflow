@@ -38,6 +38,7 @@ const ChooseFileNode: FC<ChooseFileNodeProps> = ({ id }) => {
         typing="string"
         value={value}
         onChange={handleChange}
+        unConnectable
       >
         <input type="file" />
       </NodeVariable>

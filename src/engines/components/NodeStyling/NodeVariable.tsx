@@ -22,6 +22,7 @@ export interface NodeVariableProps<T> extends PropsWithChildren {
   typing: string
   value?: T
   onChange?: (value: any) => void
+  unConnectable?: boolean
 }
 
 function NodeVariable<T>({
@@ -29,6 +30,7 @@ function NodeVariable<T>({
   label,
   typing,
   children,
+  unConnectable,
   value,
   onChange,
 }: NodeVariableProps<T>) {
@@ -55,7 +57,7 @@ function NodeVariable<T>({
   return (
     <div className={styles.NodeVariable}>
       <div className={styles.Label}>
-        <TargetHandle ref={handleRef} id={fieldId} />
+        {!unConnectable && <TargetHandle ref={handleRef} id={fieldId} />}
         <Row>
           <label htmlFor={fieldId}>{label}</label>
           <SizedBox width="0.5rem" />
