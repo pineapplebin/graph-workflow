@@ -1,9 +1,8 @@
-.NodeVariable {
+.NodeOutput {
   position: relative;
 }
 
 .Label {
-  /* styling */
   position: relative;
   padding: var(--common-gap);
 }
@@ -12,10 +11,7 @@
   font-weight: bold;
 }
 
-.InputControl {
-  /* styling */
-  position: relative;
+.Result {
   background-color: var(--grey-color-dark);
-  border-radius: var(--border-radius);
   padding: var(--common-gap);
 }

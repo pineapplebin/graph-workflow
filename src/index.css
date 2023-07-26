@@ -1,5 +1,10 @@
 @import './theme-variables.css';
 
+@font-face {
+  font-family: 'BlackOpsOne';
+  src: url('./assets/BlackOpsOne-Regular.ttf');
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;

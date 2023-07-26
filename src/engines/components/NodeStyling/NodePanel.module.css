@@ -1,7 +1,62 @@
 .NodePanel {
+  position: relative;
   /* styling */
   min-width: 24rem;
-  background-color: var(--grey-color-lightest);
+  background-color: var(--grey-color);
   border-radius: var(--border-radius);
-  padding: var(--small-gap);
+}
+
+.Header {
+  /* styling */
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  background-color: var(--grey-color-light);
+  border-bottom: 1px solid var(--grey-color-ultra-lightest);
+  padding: var(--common-gap);
+}
+
+.Content {
+  position: relative;
+}
+
+.Running::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 0 0.8rem 0.2rem var(--primary-color);
+  animation: shinning 1s ease-in-out infinite alternate;
+}
+
+.Selected {
+  outline: 0.2rem solid var(--primary-color);
+}
+
+.Error {
+  outline: 0.2rem solid var(--error-color);
+}
+
+@keyframes shinning {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.PanelControl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(0);
+  opacity: 0;
+  transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+}
+
+.PanelControlActive {
+  transform: translateY(calc(-100% - 0.5rem));
+  opacity: 1;
 }

@@ -1,25 +1,21 @@
 import { FC } from 'react'
 import { Container, Panel } from '@/desktop-ui'
 import { Background, ReactFlow, ReactFlowProvider } from 'reactflow'
+import { useNodeTypes } from '@/engines/node-types'
+import { useGetFlow } from '@/engines/store'
 
 import 'reactflow/dist/style.css'
 import styles from './index.module.css'
-import { useNodeTypes } from '@/engines/node-types'
-import { useFlowData } from '../../store/flow'
-import { shallow } from 'zustand/shallow'
 
 const proOptions = { hideAttribution: true }
 
 const GraphEditor: FC = () => {
   const nodeTypes = useNodeTypes()
-  const { nodes, edges, onNodesChange } = useFlowData(
-    (state) => ({
-      nodes: state.nodes,
-      edges: state.edges,
-      onNodesChange: state.onNodesChange,
-    }),
-    shallow,
-  )
+  const { nodes, edges, onNodesChange } = useGetFlow((state) => ({
+    nodes: state.nodes,
+    edges: state.edges,
+    onNodesChange: state.onNodesChange,
+  }))
 
   return (
     <ReactFlowProvider>

@@ -7,8 +7,9 @@
 }
 
 .Active {
+  transition: background-color 0.1s ease-in-out;
   background-color: var(--primary-color-dark);
-  border: 0.1rem solid var(--white-color);
+  outline: 0.1rem solid var(--white-color);
 }
 
 .NodeListItem:last-child {
