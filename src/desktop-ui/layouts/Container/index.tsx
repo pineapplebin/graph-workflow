@@ -13,11 +13,12 @@ interface ContainerProps extends PropsWithChildren, PropsWithStyling {
    * true 时 x 轴与 y 轴都可滚动
    */
   scrollable?: boolean
+  onClick?: () => void
 }
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, style, children, ...props }, ref) => {
-    const { width, height, scrollable } = props
+    const { width, height, scrollable, onClick } = props
 
     const mergedStyle = useMergeStyle(style, {
       width,
@@ -33,6 +34,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
           scrollable && styles.Scrollable,
         )}
         style={mergedStyle}
+        onClick={onClick}
       >
         {children}
       </div>

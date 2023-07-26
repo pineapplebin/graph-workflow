@@ -5,9 +5,9 @@ import { NodeContext, NodeContextValue } from './NodeContext'
 
 import cx from 'classnames'
 import styles from './NodePanel.module.css'
+import { useGetFlow } from '@/engines/store'
 
 export interface NodePanelProps extends PropsWithChildren, PropsWithStyling {
-  type: string
   node: Node | null
   nodeId: string | null
   running?: boolean
@@ -22,7 +22,6 @@ const NodePanel: FC<NodePanelProps> = ({
   className,
   style,
   children,
-  type,
   node,
   nodeId,
   running,
@@ -31,12 +30,18 @@ const NodePanel: FC<NodePanelProps> = ({
   const contextValue = useMemo<NodeContextValue>(() => {
     return { node, nodeId }
   }, [node])
-
-  const handleStartRun = () => {}
+  const { handleStartRun, systemRunning } = useGetFlow((state) => ({
+    handleStartRun: state.startRun,
+    systemRunning: state.systemRunning,
+  }))
 
   return (
     <NodeContext.Provider value={contextValue}>
-      <PanelControl selected={node?.selected} onStartRun={handleStartRun} />
+      <PanelControl
+        disabled={systemRunning}
+        selected={node?.selected}
+        onStartRun={() => nodeId && handleStartRun(nodeId)}
+      />
       <div
         className={cx(
           className,
@@ -47,7 +52,7 @@ const NodePanel: FC<NodePanelProps> = ({
         )}
         style={style}
       >
-        <div className={styles.Header}>{type}</div>
+        <div className={styles.Header}>{node?.type}</div>
         <div className={styles.Content}>{children}</div>
       </div>
     </NodeContext.Provider>
@@ -55,17 +60,24 @@ const NodePanel: FC<NodePanelProps> = ({
 }
 
 interface PanelControlProps {
+  disabled?: boolean
   selected?: boolean
   onStartRun?: () => void
 }
 
-const PanelControl: FC<PanelControlProps> = ({ selected, onStartRun }) => {
+const PanelControl: FC<PanelControlProps> = ({
+  disabled,
+  selected,
+  onStartRun,
+}) => {
   return (
     <div
       className={cx(styles.PanelControl, selected && styles.PanelControlActive)}
     >
       <Row>
-        <Button onClick={onStartRun}>Run</Button>
+        <Button disabled={disabled} onClick={onStartRun}>
+          Run
+        </Button>
       </Row>
     </div>
   )

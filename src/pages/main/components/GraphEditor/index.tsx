@@ -11,11 +11,15 @@ const proOptions = { hideAttribution: true }
 
 const GraphEditor: FC = () => {
   const nodeTypes = useNodeTypes()
-  const { nodes, edges, onNodesChange } = useGetFlow((state) => ({
-    nodes: state.nodes,
-    edges: state.edges,
-    onNodesChange: state.onNodesChange,
-  }))
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useGetFlow(
+    (state) => ({
+      nodes: state.nodes,
+      edges: state.edges,
+      onNodesChange: state.onNodesChange,
+      onEdgesChange: state.onEdgesChange,
+      onConnect: state.onConnect,
+    }),
+  )
 
   return (
     <ReactFlowProvider>
@@ -27,6 +31,8 @@ const GraphEditor: FC = () => {
             edges={edges}
             proOptions={proOptions}
             onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
             nodesDraggable
           >
             <Background></Background>

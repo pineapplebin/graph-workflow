@@ -32,7 +32,7 @@ function NodeVariable<T>({
   value,
   onChange,
 }: NodeVariableProps<T>) {
-  const { nodeId } = useContext(NodeContext)
+  const { nodeId, node } = useContext(NodeContext)
   const updateNodeInternals = useUpdateNodeInternals()
   const handleRef = useRef<HTMLDivElement>(null)
 
@@ -59,7 +59,7 @@ function NodeVariable<T>({
         <Row>
           <label htmlFor={fieldId}>{label}</label>
           <SizedBox width="0.5rem" />
-          <Typing typing={typing} />
+          <Typing typing={typing} missing={!value && !node?.data.output} />
         </Row>
       </div>
       <Container className={styles.InputControl}>{fieldControl}</Container>

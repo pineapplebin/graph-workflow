@@ -1,9 +1,9 @@
 import { createContext } from 'react'
-import { Node } from 'reactflow'
+import { EngineNode } from '../../types'
 
 export interface NodeContextValue {
   nodeId: string | null
-  node: Node | null
+  node: EngineNode | null
 }
 
 export const NodeContext = createContext<NodeContextValue>({

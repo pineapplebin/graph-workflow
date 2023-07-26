@@ -1,4 +1,4 @@
 import { memo } from 'react'
-import _ChooseFileNode from './ChooseFileNode'
+import ChooseFileNode from './ChooseFile'
 
-export const ChooseFileNode = memo(_ChooseFileNode)
+export const ChooseFile = memo(ChooseFileNode)

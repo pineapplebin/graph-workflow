@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { HSplitContainer, SplitContainerPanel } from '@/desktop-ui'
 import NodeList from './components/NodeList'
 import GraphEditor from './components/GraphEditor'
@@ -10,12 +10,31 @@ const MainPage: FC = () => {
       {
         id: 'ChooseFile',
         type: 'ChooseFile',
-        position: { x: 0, y: 0 },
+        position: { x: 50, y: 50 },
+        data: {},
+      },
+      {
+        id: 'ImagePreview',
+        type: 'ImagePreview',
+        position: { x: 550, y: 50 },
         data: {},
       },
     ],
-    edges: [],
+    edges: [
+      {
+        source: 'ChooseFile',
+        sourceHandle: 'ChooseFile_output',
+        target: 'ImagePreview',
+        targetHandle: 'ImagePreview_image',
+        id: 'reactflow__edge-ChooseFileChooseFile_output-ImagePreviewImagePreview_image',
+      },
+    ],
   })
+
+  useEffect(() => {
+    // @ts-ignore
+    window.store = store
+  }, [])
 
   return (
     <IndividualFlowContext.Provider value={store}>

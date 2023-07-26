@@ -27,7 +27,7 @@
   bottom: 0;
   left: 0;
   box-shadow: 0 0 0.8rem 0.2rem var(--primary-color);
-  animation: shinning 1s ease-in-out infinite alternate;
+  animation: shinning 0.4s ease-in-out infinite alternate;
 }
 
 .Selected {

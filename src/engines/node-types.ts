@@ -1,9 +1,12 @@
 import { useMemo } from 'react'
-import { ChooseFileNode } from './built-ins/ChooseFile'
 import { NodeTypes } from 'reactflow'
 
+import { ChooseFile } from './built-ins/ChooseFile'
+import { ImagePreview } from './built-ins/ImagePreview'
+
 const CONST_NODE_TYPES: NodeTypes = {
-  ChooseFile: ChooseFileNode,
+  ChooseFile,
+  ImagePreview,
 }
 
 /**

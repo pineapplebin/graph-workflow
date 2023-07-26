@@ -8,11 +8,15 @@ import styles from './NodeListItem.module.css'
 export interface NodeListItemProps {
   node: Node
   selected?: boolean
+  onClick?: () => void
 }
 
-const NodeListItem: FC<NodeListItemProps> = ({ node, selected }) => {
+const NodeListItem: FC<NodeListItemProps> = ({ node, selected, onClick }) => {
   return (
-    <Container className={cx(styles.NodeListItem, selected && styles.Active)}>
+    <Container
+      className={cx(styles.NodeListItem, selected && styles.Active)}
+      onClick={onClick}
+    >
       <Row>
         <span>
           {node.id}({node.type})
