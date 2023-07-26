@@ -1,14 +1,5 @@
 import { createContext, useContext, useEffect, useMemo } from 'react'
-import {
-  Node,
-  Edge,
-  NodeChange,
-  applyNodeChanges,
-  EdgeChange,
-  applyEdgeChanges,
-  addEdge,
-  Connection,
-} from 'reactflow'
+import { Node, Edge } from 'reactflow'
 import { StoreApi, createStore, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { DataInEngine } from './types'
@@ -22,9 +13,6 @@ export interface FlowDataState {
   // actions
   setNodes: (nodes: Node[]) => void
   setEdges: (edges: Edge[]) => void
-  onNodesChange: (changes: NodeChange[]) => void
-  onEdgesChange: (changes: EdgeChange[]) => void
-  onConnect: (params: Edge | Connection) => void
   updateNodeData: (id: string, data: any) => void
   // engine related
   startRun: (nodeId: string) => void
@@ -56,15 +44,6 @@ export function useInitialFlow(
         },
         setEdges: (edges) => {
           set({ edges })
-        },
-        onNodesChange: (changes) => {
-          set({ nodes: applyNodeChanges(changes, get().nodes) })
-        },
-        onEdgesChange: (changes) => {
-          set({ edges: applyEdgeChanges(changes, get().edges) })
-        },
-        onConnect: (params) => {
-          set({ edges: addEdge(params, get().edges) })
         },
         updateNodeData: (id, data: any) => {
           const nodes = get().nodes
