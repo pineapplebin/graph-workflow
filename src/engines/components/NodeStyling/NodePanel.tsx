@@ -1,7 +1,7 @@
-import { FC, PropsWithChildren, useMemo } from 'react'
-import { Node } from 'reactflow'
-import { Button, Row, PropsWithStyling } from '@/desktop-ui'
-import { NodeContext, NodeContextValue } from './NodeContext'
+import { type FC, type PropsWithChildren, useMemo } from 'react'
+import type { Node } from 'reactflow'
+import { Button, Row, type PropsWithStyling } from '@/desktop-ui'
+import { NodeContext, type NodeContextValue } from './NodeContext'
 
 import cx from 'classnames'
 import styles from './NodePanel.module.css'

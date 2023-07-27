@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { EngineNode } from '../../types'
+import type { EngineNode } from '../../types'
 
 export interface NodeContextValue {
   nodeId: string | null

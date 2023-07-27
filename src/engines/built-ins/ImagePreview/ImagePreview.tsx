@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import { NodeProps } from 'reactflow'
+import type { FC } from 'react'
+import type { NodeProps } from 'reactflow'
 import {
   NodePanel,
   NodeVariable,

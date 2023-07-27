@@ -1,5 +1,5 @@
-import { RefObject } from 'react'
-import { Node } from 'reactflow'
+import type { RefObject } from 'react'
+import type { Node } from 'reactflow'
 
 export type NodeComponentRunnerHelpers = {
   updateCurrentNodeData: (data: DataInEngine) => void

@@ -1,6 +1,6 @@
-import { FC, useCallback, useMemo } from 'react'
+import { type FC, useCallback, useMemo } from 'react'
 import { Column, Container, Panel, TabBar } from '@/desktop-ui'
-import { TabOption } from '@/desktop-ui/TabBar'
+import type { TabOption } from '@/desktop-ui/TabBar'
 import { STYLING } from '@/utils/styling'
 import { useGetFlow } from '@/engines/store'
 import NodeListItem from './NodeListItem'

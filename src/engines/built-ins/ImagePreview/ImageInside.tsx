@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { type FC, useMemo } from 'react'
 import { Container } from '@/desktop-ui'
 
 import styles from './ImageInside.module.css'

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { type FC } from 'react'
 import type { PropsWithStyling } from '../../common-types'
 import { useDrag } from '@use-gesture/react'
 

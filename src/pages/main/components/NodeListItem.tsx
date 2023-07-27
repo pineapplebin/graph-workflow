@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import { type FC } from 'react'
 import { Container, Row } from '@/desktop-ui'
-import { Node } from 'reactflow'
+import type { Node } from 'reactflow'
 
 import cx from 'classnames'
 import styles from './NodeListItem.module.css'

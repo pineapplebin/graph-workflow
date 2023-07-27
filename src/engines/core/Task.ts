@@ -1,7 +1,7 @@
-import { StoreApi } from 'zustand'
-import { Edge } from 'reactflow'
-import { EngineNode } from '../types'
-import { FlowDataState } from '../store'
+import type { StoreApi } from 'zustand'
+import type { Edge } from 'reactflow'
+import type { EngineNode } from '../types'
+import type { FlowDataState } from '../store'
 
 export class Task {
   constructor(public node: EngineNode, public edges: Edge[]) {}

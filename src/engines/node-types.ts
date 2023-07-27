@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { NodeTypes } from 'reactflow'
+import type { NodeTypes } from 'reactflow'
 
 import { ChooseFile } from './built-ins/ChooseFile'
 import { ImagePreview } from './built-ins/ImagePreview'

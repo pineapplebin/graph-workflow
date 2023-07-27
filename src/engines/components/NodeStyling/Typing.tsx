@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { useMemo, type FC } from 'react'
 import { Row } from '@/desktop-ui'
 
 import cx from 'classnames'

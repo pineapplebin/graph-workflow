@@ -21,4 +21,4 @@ export {
 }
 export * from './hooks'
 export * from './enums'
-export * from './common-types'
+export type * from './common-types'

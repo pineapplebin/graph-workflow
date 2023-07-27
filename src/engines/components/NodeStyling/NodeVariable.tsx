@@ -1,12 +1,12 @@
 import {
   Children,
-  PropsWithChildren,
   cloneElement,
   isValidElement,
   useContext,
   useEffect,
   useMemo,
   useRef,
+  type PropsWithChildren,
 } from 'react'
 import { useUpdateNodeInternals } from 'reactflow'
 import { NodeContext } from './NodeContext'

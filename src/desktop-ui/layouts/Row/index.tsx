@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react'
+import { type FC, type PropsWithChildren } from 'react'
 import { asFlexItem, useMergeStyle, usePropsWithDefaults } from '../../hooks'
 import { MainAxisAlignment } from '../../enums'
 import type { PropsWithStyling } from '../../common-types'

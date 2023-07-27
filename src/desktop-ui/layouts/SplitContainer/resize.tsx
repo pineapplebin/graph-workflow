@@ -3,10 +3,10 @@ import {
   useRef,
   useState,
   useMemo,
-  ReactElement,
+  type ReactElement,
   useCallback,
 } from 'react'
-import Panel, { PanelProps } from './Panel'
+import Panel, { type PanelProps } from './Panel'
 import { STYLING, stringUnitToNumberPx } from '@/utils/styling'
 import clamp from 'lodash/clamp'
 

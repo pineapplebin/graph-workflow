@@ -1,4 +1,4 @@
-import { ReactElement, useMemo } from 'react'
+import { type ReactElement, useMemo } from 'react'
 import SizedBox from '../SizedBox'
 import Grabber from './Grabber'
 import { STYLING } from '@/utils/styling'

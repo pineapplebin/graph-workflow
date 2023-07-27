@@ -1,18 +1,18 @@
-import { FC, useMemo, useRef } from 'react'
+import { type FC, useMemo, useRef } from 'react'
 import { Container, Panel } from '@/desktop-ui'
 import {
   Background,
-  Connection,
   Controls,
-  Edge,
-  EdgeChange,
-  NodeChange,
   ReactFlow,
   ReactFlowProvider,
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
   updateEdge,
+  type Connection,
+  type Edge,
+  type EdgeChange,
+  type NodeChange,
 } from 'reactflow'
 import { useNodeTypes } from '@/engines/node-types'
 import { useGetFlow } from '@/engines/store'

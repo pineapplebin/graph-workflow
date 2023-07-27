@@ -1,5 +1,5 @@
-import { FC, SyntheticEvent, useCallback, useState } from 'react'
-import { NodeProps } from 'reactflow'
+import { type FC, type SyntheticEvent, useCallback, useState } from 'react'
+import type { NodeProps } from 'reactflow'
 import {
   NodeOutput,
   NodePanel,

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { Handle, HandleProps, Position } from 'reactflow'
+import { Handle, type HandleProps, Position } from 'reactflow'
 
 type SourceHandleProps = Omit<HandleProps, 'type' | 'position' | 'style'> & {}
 

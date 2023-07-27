@@ -1,8 +1,8 @@
 import {
-  PropsWithChildren,
+  type PropsWithChildren,
   useMemo,
   Children,
-  ReactElement,
+  type ReactElement,
   isValidElement,
 } from 'react'
 

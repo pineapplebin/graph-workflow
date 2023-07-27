@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, HTMLProps } from 'react'
+import { type FC, type PropsWithChildren, type HTMLProps } from 'react'
 import { asFlexItem } from '../hooks'
 import type { PropsWithOnClick } from '../common-types'
 

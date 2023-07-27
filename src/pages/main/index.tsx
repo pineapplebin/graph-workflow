@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { type FC, useEffect } from 'react'
 import { HSplitContainer, SplitContainerPanel } from '@/desktop-ui'
 import NodeList from './components/NodeList'
 import GraphEditor from './components/GraphEditor'

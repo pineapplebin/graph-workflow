@@ -1,8 +1,8 @@
-import { StoreApi } from 'zustand'
-import { FlowDataState } from '../store'
+import { type StoreApi } from 'zustand'
+import { type FlowDataState } from '../store'
 import { Task } from './Task'
 import { TaskStack } from './TaskStack'
-import { EngineNode } from '../types'
+import { type EngineNode } from '../types'
 
 class EnginePipeline {
   public store!: StoreApi<FlowDataState>
