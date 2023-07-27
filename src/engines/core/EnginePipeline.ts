@@ -3,6 +3,7 @@ import { type FlowDataState } from '../store'
 import { Task } from './Task'
 import { TaskStack } from './TaskStack'
 import { type EngineNode } from '../types'
+import { AbortError } from './tools'
 
 class EnginePipeline {
   public store!: StoreApi<FlowDataState>
@@ -28,9 +29,18 @@ class EnginePipeline {
     })
 
     const taskStack = this.makeTaskStack(node, { nodes, edges })
+
     while (taskStack.isNotEmpty) {
       const task = taskStack.pop()!
-      await task.exec(this.store)
+      try {
+        await task.exec(this.store)
+      } catch (e) {
+        if (e instanceof AbortError) {
+          break
+        } else {
+          throw e
+        }
+      }
     }
 
     this.store.setState({ systemRunning: false })

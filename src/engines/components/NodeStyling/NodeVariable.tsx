@@ -7,34 +7,34 @@ import {
   useMemo,
   useRef,
   type PropsWithChildren,
+  useCallback,
 } from 'react'
 import { useUpdateNodeInternals } from 'reactflow'
-import { NodeContext } from './NodeContext'
+import { NodeContext, NodeFormValueContext } from './NodeContext'
 import { TargetHandle } from './Handle'
 import { Row, SizedBox, Container } from '@/desktop-ui'
 import { Typing } from './Typing'
 
 import styles from './NodeVariable.module.css'
 
-export interface NodeVariableProps<T> extends PropsWithChildren {
+export interface NodeVariableProps extends PropsWithChildren {
   name: string
   label: string
   typing: string
-  value?: T
-  onChange?: (value: any) => void
   unConnectable?: boolean
 }
 
-function NodeVariable<T>({
+function NodeVariable({
   name,
   label,
   typing,
   children,
   unConnectable,
-  value,
-  onChange,
-}: NodeVariableProps<T>) {
+}: NodeVariableProps) {
   const { nodeId, node } = useContext(NodeContext)
+  const { value: formValue, onChange: onChangeFieldValue } =
+    useContext(NodeFormValueContext)
+
   const updateNodeInternals = useUpdateNodeInternals()
   const handleRef = useRef<HTMLDivElement>(null)
 
@@ -49,8 +49,16 @@ function NodeVariable<T>({
     }
   }, [nodeId, updateNodeInternals])
 
+  const handleChange = useCallback(
+    (value: any) => {
+      onChangeFieldValue(name, value)
+    },
+    [label, onChangeFieldValue],
+  )
+
+  const value = formValue[label]
   const fieldControl = useInjectChild(
-    { id: fieldId, value, onChange },
+    { id: fieldId, value, onChange: handleChange },
     children,
   )
 
@@ -69,9 +77,11 @@ function NodeVariable<T>({
   )
 }
 
-function useInjectChild<T>(
-  fieldProps: Pick<NodeVariableProps<T>, 'value' | 'onChange'> & {
+function useInjectChild(
+  fieldProps: {
+    value?: any
     id?: string
+    onChange?: (value: any) => void
   },
   children: PropsWithChildren['children'],
 ) {

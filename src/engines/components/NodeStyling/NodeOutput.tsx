@@ -19,7 +19,7 @@ export interface NodeOutputProps extends PropsWithChildren {
 }
 
 const NodeOutput: FC<NodeOutputProps> = ({ typing, children }) => {
-  const { nodeId, node } = useContext(NodeContext)
+  const { nodeId, node, error } = useContext(NodeContext)
   const handleRef = useRef<HTMLDivElement>(null)
   const updateNodeInternals = useUpdateNodeInternals()
 
@@ -34,6 +34,18 @@ const NodeOutput: FC<NodeOutputProps> = ({ typing, children }) => {
     return `${nodeId}_output`
   }, [nodeId])
 
+  const content = useMemo(() => {
+    if (children || error) {
+      const display = !error ? (
+        children
+      ) : (
+        <span className={styles.ErrorHint}>{error}</span>
+      )
+      return <Container className={styles.Result}>{display}</Container>
+    }
+    return null
+  }, [children, error])
+
   return (
     <div className={styles.NodeOutput}>
       <div className={styles.Label}>
@@ -44,7 +56,7 @@ const NodeOutput: FC<NodeOutputProps> = ({ typing, children }) => {
         </Row>
         <SourceHandle ref={handleRef} id={handleId} />
       </div>
-      {children && <Container className={styles.Result}>{children}</Container>}
+      {content}
     </div>
   )
 }

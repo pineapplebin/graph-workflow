@@ -18,7 +18,7 @@ const CustomNodeComponent: ComponentType<NodeProps> = (props) => {
 
   const Comp = useMemo(() => {
     return lazy<ComponentType<NodeProps>>(
-      () => import(`./built-ins/${type}/index.ts`),
+      () => import(`./built-ins/${type}/index`),
     )
   }, [type])
 

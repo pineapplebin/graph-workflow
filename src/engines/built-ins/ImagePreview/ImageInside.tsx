@@ -1,21 +1,21 @@
 import { type FC, useMemo } from 'react'
 import { Container } from '@/desktop-ui'
+import type { LimitedNodeProps } from '../../types'
 
 import styles from './ImageInside.module.css'
 
-interface ImageInsideProps {
-  image?: string | Blob | null
-}
+interface ImageInsideProps
+  extends LimitedNodeProps<any, string | Blob | null> {}
 
-const ImageInside: FC<ImageInsideProps> = ({ image }) => {
+const ImageInside: FC<ImageInsideProps> = ({ data: { output } }) => {
   const imageContent = useMemo<string | null>(() => {
-    if (typeof image === 'string') {
-      return image
-    } else if (image !== null && image !== undefined) {
-      return URL.createObjectURL(image)
+    if (typeof output === 'string') {
+      return output
+    } else if (output !== null && output !== undefined) {
+      return URL.createObjectURL(output)
     }
     return null
-  }, [image])
+  }, [output])
 
   const content = useMemo(() => {
     if (!imageContent) {

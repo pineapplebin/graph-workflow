@@ -1,60 +1,77 @@
 import { type FC, type PropsWithChildren, useMemo } from 'react'
-import type { Node } from 'reactflow'
 import { Button, Row, type PropsWithStyling } from '@/desktop-ui'
-import { NodeContext, type NodeContextValue } from './NodeContext'
+import {
+  NodeContext,
+  NodeFormValueContext,
+  type NodeContextValue,
+} from './NodeContext'
+import { useGetFlow } from '@/engines/store'
 
 import cx from 'classnames'
 import styles from './NodePanel.module.css'
-import { useGetFlow } from '@/engines/store'
+import type { LimitedNodeProps } from '../../types'
 
-export interface NodePanelProps extends PropsWithChildren, PropsWithStyling {
-  node: Node | null
+export interface NodePanelProps<T extends Record<string, any>>
+  extends PropsWithChildren,
+    PropsWithStyling {
+  limitedNode: LimitedNodeProps
   nodeId: string | null
   running?: boolean
-  error?: boolean
+  error?: string | null
+  formValue?: Record<string, any>
+  onChange?: (field: keyof T, value: any) => void
 }
 
 /**
  * 节点的面板
  * 可控制缩放
  */
-const NodePanel: FC<NodePanelProps> = ({
+function NodePanel<T extends Record<string, any>>({
   className,
   style,
   children,
-  node,
+  limitedNode,
   nodeId,
   running,
   error,
-}) => {
+  formValue,
+  onChange,
+}: NodePanelProps<T>) {
   const contextValue = useMemo<NodeContextValue>(() => {
-    return { node, nodeId }
-  }, [node])
+    return { node: limitedNode, nodeId, error: error ?? null }
+  }, [limitedNode])
+
   const { handleStartRun, systemRunning } = useGetFlow((state) => ({
     handleStartRun: state.startRun,
     systemRunning: state.systemRunning,
   }))
 
+  const formValueContextValue = useMemo(() => {
+    return { value: formValue ?? {}, onChange: onChange ?? (() => {}) }
+  }, [formValue, onChange])
+
   return (
     <NodeContext.Provider value={contextValue}>
-      <PanelControl
-        disabled={systemRunning}
-        selected={node?.selected}
-        onStartRun={() => nodeId && handleStartRun(nodeId)}
-      />
-      <div
-        className={cx(
-          className,
-          styles.NodePanel,
-          running && styles.Running,
-          error && styles.Error,
-          node?.selected && styles.Selected,
-        )}
-        style={style}
-      >
-        <div className={styles.Header}>{node?.type}</div>
-        <div className={styles.Content}>{children}</div>
-      </div>
+      <NodeFormValueContext.Provider value={formValueContextValue}>
+        <PanelControl
+          disabled={systemRunning}
+          selected={limitedNode?.selected}
+          onStartRun={() => nodeId && handleStartRun(nodeId)}
+        />
+        <div
+          className={cx(
+            className,
+            styles.NodePanel,
+            running && styles.Running,
+            error && styles.Error,
+            limitedNode?.selected && styles.Selected,
+          )}
+          style={style}
+        >
+          <div className={styles.Header}>{limitedNode?.type}</div>
+          <div className={styles.Content}>{children}</div>
+        </div>
+      </NodeFormValueContext.Provider>
     </NodeContext.Provider>
   )
 }

@@ -2,6 +2,7 @@ import type { StoreApi } from 'zustand'
 import type { Edge } from 'reactflow'
 import type { EngineNode } from '../types'
 import type { FlowDataState } from '../store'
+import { AbortError } from './tools'
 
 export class Task {
   constructor(public node: EngineNode, public edges: Edge[]) {}
@@ -29,6 +30,15 @@ export class Task {
     }, {} as Record<string, any>)
 
     const { ref } = this.node.data
-    await ref?.current?.run(params)
+    try {
+      await ref?.current?.run(params)
+    } catch (e) {
+      this.handleError(e as Error)
+    }
+  }
+
+  protected handleError(e: Error) {
+    console.log(e.message)
+    throw new AbortError(e.message, this.node.id)
   }
 }
