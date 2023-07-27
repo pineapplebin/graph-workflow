@@ -5,7 +5,7 @@ import { TaskStack } from './TaskStack'
 import { type EngineNode } from '../types'
 import { AbortError } from './tools'
 
-class EnginePipeline {
+class EngineCore {
   public store!: StoreApi<FlowDataState>
 
   setStore(store: StoreApi<FlowDataState>) {
@@ -98,4 +98,4 @@ class EnginePipeline {
   }
 }
 
-export { EnginePipeline }
+export { EngineCore }

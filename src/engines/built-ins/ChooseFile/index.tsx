@@ -1,18 +1,16 @@
 import { Container, Column } from '@/desktop-ui'
-import { buildUp } from '../BuildUpComponent'
+import { buildUp } from '../../BuildUpComponent'
 import { InputFile } from '../../components/form-controls'
 
-export default buildUp<{ file: File | null }>({
+export default buildUp<{ file: File | null }, File>({
   name: 'ChooseFile',
   initialFormValue: {
     file: null,
   },
-  runner: async ({ file }, { updateCurrentNodeData }) => {
-    if (!file) {
-      throw new Error('file is missing')
-    }
-    updateCurrentNodeData({ output: file })
-  },
+  pipelines: [
+    ['validation.required', 'file'],
+    ['assignment.paramsToOutput', 'file'],
+  ],
   params: [
     {
       name: 'file',
@@ -25,7 +23,7 @@ export default buildUp<{ file: File | null }>({
   output: {
     typing: 'blob',
     Body: ({ data }) => {
-      const output = data.output as File | undefined
+      const output = data.output
       return (
         output && (
           <Container width="30rem" scrollable>

@@ -1,12 +1,20 @@
-import { type ComponentType, memo, useMemo, type ReactNode } from 'react'
+import {
+  type ComponentType,
+  memo,
+  useMemo,
+  type ReactNode,
+  useCallback,
+} from 'react'
 import type { NodeProps } from 'reactflow'
 import type {
   DataInEngine,
   LimitedNodeProps,
   NodeComponentRunner,
-} from '../types'
-import { NodePanel, NodeVariable, NodeOutput } from '../components/NodeStyling'
-import { useCustomNode } from '../utils/hooks'
+} from './types'
+import { NodePanel, NodeVariable, NodeOutput } from './components/NodeStyling'
+import { useCustomNode } from './utils/hooks'
+import type { PipelineType } from './pipelines'
+import { generatePipelineRunner } from './pipelines/runner'
 
 const BUILD_PROPS = 'buildProps'
 
@@ -24,8 +32,21 @@ function BuildUpComponent(
 ) {
   const { [BUILD_PROPS]: buildUpProps, ...limitedProps } = props
 
+  const realRunner: NodeComponentRunner<any> = useCallback(
+    async (...args) => {
+      if (buildUpProps.pipelines) {
+        const pipelineRunner = generatePipelineRunner(buildUpProps.pipelines)
+        await pipelineRunner.apply(null, args)
+      }
+      if (buildUpProps.runner) {
+        await buildUpProps.runner.apply(null, args)
+      }
+    },
+    [buildUpProps.runner, buildUpProps.pipelines],
+  )
+
   const { data, helpers } = useCustomNode(props.id, {
-    runner: buildUpProps.runner,
+    runner: realRunner,
     initialFormValue: buildUpProps.initialFormValue,
   })
 
@@ -77,17 +98,18 @@ export type ParamsPortOption = {
   unConnectable?: boolean
   Body?: ComponentType<{ value?: any; onChange?: (val: any) => void }>
 }
-export type OutputPortOption = {
+export type OutputPortOption<T extends Record<string, any>, O> = {
   typing: string
-  Body?: ComponentType<LimitedNodeProps>
+  Body?: ComponentType<LimitedNodeProps<T, O>>
 }
 
-export interface BuildUpOptions<T extends Record<string, any>> {
+export interface BuildUpOptions<T extends Record<string, any>, O = any> {
   name: string
   initialFormValue: Partial<T>
-  runner: NodeComponentRunner<T>
+  runner?: NodeComponentRunner<T>
+  pipelines?: PipelineType[]
   params?: ParamsPortOption[]
-  output?: OutputPortOption
+  output?: OutputPortOption<T, O>
 }
 
 /**
@@ -96,7 +118,7 @@ export interface BuildUpOptions<T extends Record<string, any>> {
  * 3. 组件的 props 会从 NodeProps 中剔除关于位置的属性
  */
 export function buildUp<T extends Record<string, any>, O = any>(
-  options: BuildUpOptions<T>,
+  options: BuildUpOptions<T, O>,
 ): ComponentType<NodeProps<DataInEngine<T, O>>> {
   const Comp = memo((props: NodeProps<DataInEngine<T, O>>) => {
     const limitedProps = {
@@ -107,7 +129,7 @@ export function buildUp<T extends Record<string, any>, O = any>(
     }
 
     const buildProps = useMemo<{
-      [BUILD_PROPS]: BuildUpOptions<T>
+      [BUILD_PROPS]: BuildUpOptions<T, O>
     }>(() => {
       return {
         [BUILD_PROPS]: options,

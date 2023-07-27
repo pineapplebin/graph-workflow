@@ -3,7 +3,7 @@ import type { Node, Edge } from 'reactflow'
 import { type StoreApi, createStore, useStore } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import type { DataInEngine } from './types'
-import { EnginePipeline } from './core/EnginePipeline'
+import { EngineCore } from './core/EngineCore'
 
 export interface FlowDataState {
   // states
@@ -40,7 +40,7 @@ export function useInitialFlow(
   initialValue: Pick<FlowDataState, 'nodes' | 'edges'>,
 ) {
   const engine = useMemo(() => {
-    return new EnginePipeline()
+    return new EngineCore()
   }, [])
 
   const store = useMemo(() => {
