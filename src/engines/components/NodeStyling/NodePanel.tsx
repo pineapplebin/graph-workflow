@@ -1,11 +1,17 @@
-import { type FC, type PropsWithChildren, useMemo } from 'react'
-import { Button, Row, type PropsWithStyling } from '@/desktop-ui'
+import { type FC, type PropsWithChildren, useMemo, useCallback } from 'react'
+import {
+  Button,
+  Row,
+  type PropsWithStyling,
+  Icon,
+  SizedBox,
+} from '@/desktop-ui'
 import {
   NodeContext,
   NodeFormValueContext,
   type NodeContextValue,
 } from './NodeContext'
-import { useGetFlow } from '@/engines/store'
+import { extractNodeTypesList, useGetFlow } from '@/engines/store'
 
 import cx from 'classnames'
 import styles from './NodePanel.module.css'
@@ -41,10 +47,30 @@ function NodePanel<T extends Record<string, any>>({
     return { node: limitedNode, nodeId, error: error ?? null }
   }, [limitedNode])
 
-  const { handleStartRun, systemRunning } = useGetFlow((state) => ({
+  const { handleStartRun, systemRunning, reducer } = useGetFlow((state) => ({
     handleStartRun: state.startRun,
     systemRunning: state.systemRunning,
+    reducer: state.reducer,
   }))
+
+  /**
+   * 删除节点
+   * 1. 删除节点
+   * 2. 删除节点的所有边
+   * 3. 更新节点类型列表
+   */
+  const handleRemove = useCallback(() => {
+    reducer((set, get) => {
+      const newNodes = get().nodes.filter((node) => node.id !== nodeId)
+      set({
+        nodes: newNodes,
+        edges: get().edges.filter(
+          (edge) => !(edge.source === nodeId || edge.target === nodeId),
+        ),
+        nodeTypesList: extractNodeTypesList(newNodes),
+      })
+    })
+  }, [nodeId])
 
   const formValueContextValue = useMemo(() => {
     return { value: formValue ?? {}, onChange: onChange ?? (() => {}) }
@@ -57,6 +83,7 @@ function NodePanel<T extends Record<string, any>>({
           disabled={systemRunning}
           selected={limitedNode?.selected}
           onStartRun={() => nodeId && handleStartRun(nodeId)}
+          onRemove={handleRemove}
         />
         <div
           className={cx(
@@ -80,12 +107,14 @@ interface PanelControlProps {
   disabled?: boolean
   selected?: boolean
   onStartRun?: () => void
+  onRemove?: () => void
 }
 
 const PanelControl: FC<PanelControlProps> = ({
   disabled,
   selected,
   onStartRun,
+  onRemove,
 }) => {
   return (
     <div
@@ -93,7 +122,11 @@ const PanelControl: FC<PanelControlProps> = ({
     >
       <Row>
         <Button disabled={disabled} onClick={onStartRun}>
-          Run
+          <Icon type="caret-right" />
+        </Button>
+        <SizedBox width="0.2rem" />
+        <Button disabled={disabled} onClick={onRemove}>
+          <Icon type="delete" />
         </Button>
       </Row>
     </div>

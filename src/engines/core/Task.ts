@@ -38,7 +38,6 @@ export class Task {
   }
 
   protected handleError(e: Error) {
-    console.log(e.message)
     throw new AbortError(e.message, this.node.id)
   }
 }

@@ -29,7 +29,7 @@ export const IndividualFlowContext = createContext<StoreApi<FlowDataState>>(
   null as any,
 )
 
-function extractNodeTypesList(nodes: Node[]) {
+export function extractNodeTypesList(nodes: Node[]) {
   return Array.from(new Set(nodes.map((node) => node.type!))).sort()
 }
 

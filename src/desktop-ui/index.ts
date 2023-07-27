@@ -1,6 +1,7 @@
 import Button from './Button'
 import Panel from './Panel'
 import TabBar from './TabBar'
+import Icon from './Icon'
 
 import Column from './layouts/Column'
 import Row from './layouts/Row'
@@ -9,6 +10,7 @@ import Container from './layouts/Container'
 import { HSplitContainer, SplitContainerPanel } from './layouts/SplitContainer'
 
 export {
+  Icon,
   Button,
   Panel,
   TabBar,

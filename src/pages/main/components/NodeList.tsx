@@ -3,6 +3,7 @@ import {
   Button,
   Column,
   Container,
+  Icon,
   Panel,
   Row,
   SizedBox,
@@ -45,7 +46,9 @@ const NodeList: FC = () => {
       <Panel style={{ padding: STYLING.smallGap }}>
         <Column>
           <Row style={{ height: 'auto' }}>
-            <Button color="dark">Add</Button>
+            <Button color="dark">
+              <Icon type="plus" />
+            </Button>
           </Row>
           <SizedBox height={STYLING.smallGap} />
           <Container className={styles.Container} scrollable tabIndex={0}>
