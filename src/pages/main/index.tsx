@@ -19,6 +19,12 @@ const MainPage: FC = () => {
         position: { x: 550, y: 50 },
         data: {},
       },
+      {
+        id: 'InputText',
+        type: 'InputText',
+        position: { x: 130, y: 350 },
+        data: {},
+      },
     ],
     edges: [
       {
