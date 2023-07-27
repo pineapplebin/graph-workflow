@@ -5,7 +5,10 @@ import type { PropsWithStyling } from '../../common-types'
 import cx from 'classnames'
 import styles from './index.module.css'
 
-interface ContainerProps extends PropsWithChildren, PropsWithStyling {
+interface ContainerProps
+  extends PropsWithChildren,
+    PropsWithStyling,
+    Partial<Pick<HTMLDivElement, 'tabIndex'>> {
   width?: number | string
   height?: number | string
   /**
@@ -18,7 +21,7 @@ interface ContainerProps extends PropsWithChildren, PropsWithStyling {
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, style, children, ...props }, ref) => {
-    const { width, height, scrollable, onClick } = props
+    const { width, height, scrollable, onClick, ...restDivAttrs } = props
 
     const mergedStyle = useMergeStyle(style, {
       width,
@@ -35,6 +38,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
         )}
         style={mergedStyle}
         onClick={onClick}
+        {...restDivAttrs}
       >
         {children}
       </div>

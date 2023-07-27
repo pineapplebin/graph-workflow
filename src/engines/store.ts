@@ -8,6 +8,7 @@ import { EnginePipeline } from './core/EnginePipeline'
 export interface FlowDataState {
   // states
   nodes: Node<DataInEngine>[]
+  nodeTypesList: string[]
   edges: Edge[]
   systemRunning: boolean
   // actions
@@ -28,6 +29,10 @@ export const IndividualFlowContext = createContext<StoreApi<FlowDataState>>(
   null as any,
 )
 
+function extractNodeTypesList(nodes: Node[]) {
+  return Array.from(new Set(nodes.map((node) => node.type!))).sort()
+}
+
 /**
  * 初始化 flow data
  */
@@ -43,10 +48,11 @@ export function useInitialFlow(
       return {
         // states
         ...initialValue,
+        nodeTypesList: extractNodeTypesList(initialValue.nodes),
         systemRunning: false,
         // actions
         setNodes: (nodes) => {
-          set({ nodes })
+          set({ nodes, nodeTypesList: extractNodeTypesList(nodes) })
         },
         setEdges: (edges) => {
           set({ edges })

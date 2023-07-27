@@ -23,12 +23,13 @@ import styles from './index.module.css'
 const proOptions = { hideAttribution: true }
 
 const GraphEditor: FC = () => {
-  const nodeTypes = useNodeTypes()
-  const { nodes, edges, reducer } = useGetFlow((state) => ({
+  const { nodes, edges, nodeTypesList, reducer } = useGetFlow((state) => ({
     nodes: state.nodes,
     edges: state.edges,
+    nodeTypesList: state.nodeTypesList,
     reducer: state.reducer,
   }))
+  const nodeTypes = useNodeTypes(nodeTypesList)
 
   const edgeUpdateSuccessful = useRef(false)
   const fns = useMemo(() => {

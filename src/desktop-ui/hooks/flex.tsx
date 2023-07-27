@@ -56,10 +56,11 @@ export function useAsFlexItem<P extends AsFlexItemProps>({
 export function asFlexItem<T extends unknown, P extends PropsWithStyling>(
   comp: ComponentType<P>,
 ) {
-  const Comp = comp
+  const Comp = comp as ComponentType<Omit<P, keyof AsFlexItemProps>>
 
   return forwardRef<T, P & AsFlexItemProps>(function (props, ref) {
-    const { className, style } = useAsFlexItem(props)
+    const { flexGrow, flexShrink, ...rest } = props
+    const { className, style } = useAsFlexItem({ flexGrow, flexShrink })
 
     const passedClassName = cx(className, props.className)
     const passedStyle = useMergeStyle(style, props.style)
@@ -69,7 +70,7 @@ export function asFlexItem<T extends unknown, P extends PropsWithStyling>(
         ref={ref}
         className={passedClassName}
         style={passedStyle}
-        {...props}
+        {...rest}
       />
     )
   })

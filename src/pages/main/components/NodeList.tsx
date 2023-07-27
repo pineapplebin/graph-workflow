@@ -1,5 +1,13 @@
 import { type FC, useCallback, useMemo } from 'react'
-import { Column, Container, Panel, TabBar } from '@/desktop-ui'
+import {
+  Button,
+  Column,
+  Container,
+  Panel,
+  Row,
+  SizedBox,
+  TabBar,
+} from '@/desktop-ui'
 import type { TabOption } from '@/desktop-ui/TabBar'
 import { STYLING } from '@/utils/styling'
 import { useGetFlow } from '@/engines/store'
@@ -35,18 +43,24 @@ const NodeList: FC = () => {
     <Column>
       <TabBar current={0} tabs={tabs} />
       <Panel style={{ padding: STYLING.smallGap }}>
-        <Container scrollable className={styles.Container}>
-          <Column>
-            {nodes.map((node) => (
-              <NodeListItem
-                key={node.id}
-                node={node}
-                selected={node.selected}
-                onClick={() => handleClickItem(node.id)}
-              />
-            ))}
-          </Column>
-        </Container>
+        <Column>
+          <Row style={{ height: 'auto' }}>
+            <Button color="dark">Add</Button>
+          </Row>
+          <SizedBox height={STYLING.smallGap} />
+          <Container className={styles.Container} scrollable tabIndex={0}>
+            <Column>
+              {nodes.map((node) => (
+                <NodeListItem
+                  key={node.id}
+                  node={node}
+                  selected={node.selected}
+                  onClick={() => handleClickItem(node.id)}
+                />
+              ))}
+            </Column>
+          </Container>
+        </Column>
       </Panel>
     </Column>
   )
