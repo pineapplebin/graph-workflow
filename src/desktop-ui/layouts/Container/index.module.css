@@ -5,16 +5,15 @@
 
 .Scrollable::-webkit-scrollbar {
   width: 0.6rem;
-  background-color: #2e3137;
+  background-color: transparent;
 }
 
 .Scrollable::-webkit-scrollbar:horizontal {
-  height: 0.6rem;
+  @apply h-2;
 }
 
 .Scrollable::-webkit-scrollbar-thumb {
-  background-color: #64676b;
-  border-radius: 0.4rem;
+  @apply rounded-[0.4rem] bg-gray-500;
 }
 
 .Scrollable::-webkit-scrollbar-corner {

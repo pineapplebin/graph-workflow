@@ -124,11 +124,19 @@ const PanelControl: FC<PanelControlProps> = ({
       className={cx(styles.PanelControl, selected && styles.PanelControlActive)}
     >
       <Row>
-        <Button disabled={disabled} onClick={onStartRun}>
+        <Button
+          className="border border-slate-100"
+          disabled={disabled}
+          onClick={onStartRun}
+        >
           <Icon type="caret-right" />
         </Button>
         <SizedBox width="0.2rem" />
-        <Button disabled={disabled} onClick={onRemove}>
+        <Button
+          className="border border-slate-100"
+          disabled={disabled}
+          onClick={onRemove}
+        >
           <Icon type="delete" />
         </Button>
       </Row>
