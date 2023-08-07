@@ -1,5 +1,5 @@
 import { type PropsWithChildren, forwardRef } from 'react'
-import { asFlexItem, useMergeStyle } from '../../hooks'
+import { useMergeStyle } from '../../hooks'
 import type { PropsWithStyling } from '../../common-types'
 
 import cx from 'classnames'
@@ -31,11 +31,7 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
     return (
       <div
         ref={ref}
-        className={cx(
-          className,
-          styles.Container,
-          scrollable && styles.Scrollable,
-        )}
+        className={cx('flex', scrollable && styles.Scrollable, className)}
         style={mergedStyle}
         onClick={onClick}
         {...restDivAttrs}
@@ -46,4 +42,4 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
   },
 )
 
-export default asFlexItem<HTMLDivElement, ContainerProps>(Container)
+export default Container

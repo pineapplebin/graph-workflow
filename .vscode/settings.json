@@ -1,14 +1,21 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.tsc.autoDetect": "off",
+  "cSpell.words": ["reactflow", "zustand"],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
   "json.schemas": [
     {
       "fileMatch": ["/*electron-builder.json5", "/*electron-builder.json"],
       "url": "https://json.schemastore.org/electron-builder"
     }
   ],
-  "cSpell.words": [
-    "reactflow",
-    "zustand"
-  ]
+  "typescript.tsc.autoDetect": "off",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+  "tailwindCSS.rootFontSize": 10
 }

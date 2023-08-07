@@ -1,32 +1,22 @@
 import { type FC, type PropsWithChildren } from 'react'
-import { asFlexItem, useMergeStyle, usePropsWithDefaults } from '../../hooks'
-import { MainAxisAlignment } from '../../enums'
 import type { PropsWithStyling } from '../../common-types'
 
 import cx from 'classnames'
-import styles from './index.module.css'
 
-interface RowProps extends PropsWithStyling, PropsWithChildren {
-  /**
-   * 主轴对齐方式
-   */
-  mainAxisAlignment?: MainAxisAlignment
-}
+interface RowProps extends PropsWithStyling, PropsWithChildren {}
 
-const Row: FC<RowProps> = ({ className, style, children, ...rest }) => {
-  const props = usePropsWithDefaults(rest, {
-    mainAxisAlignment: MainAxisAlignment.start,
-  })
-
-  const mergedStyle = useMergeStyle(style, {
-    justifyContent: props.mainAxisAlignment,
-  })
-
+const Row: FC<RowProps> = ({ className, style, children }) => {
   return (
-    <div className={cx(className, styles.Row)} style={mergedStyle}>
+    <div
+      className={cx(
+        'flex h-full w-full flex-row items-center justify-start',
+        className,
+      )}
+      style={style}
+    >
       {children}
     </div>
   )
 }
 
-export default asFlexItem(Row)
+export default Row

@@ -1,7 +1,3 @@
-.Container {
-  display: flex;
-}
-
 .Scrollable {
   overflow-x: auto;
   overflow-y: auto;

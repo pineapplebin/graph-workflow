@@ -10,11 +10,8 @@ import {
   TabBar,
 } from '@/desktop-ui'
 import type { TabOption } from '@/desktop-ui/TabBar'
-import { STYLING } from '@/utils/styling'
 import { useGetFlow } from '@/engines/store'
 import NodeListItem from './NodeListItem'
-
-import styles from './NodeList.module.css'
 
 const NodeList: FC = () => {
   const { nodes, reducer } = useGetFlow((state) => ({
@@ -23,7 +20,10 @@ const NodeList: FC = () => {
   }))
 
   const tabs = useMemo<TabOption[]>(() => {
-    return [{ key: 0, label: '节点列表' }]
+    return [
+      { key: 0, label: '节点列表' },
+      { key: 1, label: '节点属性' },
+    ]
   }, [])
 
   const handleClickItem = useCallback(
@@ -43,15 +43,19 @@ const NodeList: FC = () => {
   return (
     <Column>
       <TabBar current={0} tabs={tabs} />
-      <Panel style={{ padding: STYLING.smallGap }}>
+      <Panel className="p-2">
         <Column>
-          <Row style={{ height: 'auto' }}>
+          <Row className="!h-auto">
             <Button color="dark">
               <Icon type="plus" />
             </Button>
           </Row>
-          <SizedBox height={STYLING.smallGap} />
-          <Container className={styles.Container} scrollable tabIndex={0}>
+          <SizedBox className="h-common-gap" />
+          <Container
+            className="h-full w-full rounded bg-slate-200 p-3 focus:outline-hl focus-visible:outline-hl"
+            scrollable
+            tabIndex={0}
+          >
             <Column>
               {nodes.map((node) => (
                 <NodeListItem

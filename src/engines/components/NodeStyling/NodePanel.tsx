@@ -11,7 +11,8 @@ import {
   NodeFormValueContext,
   type NodeContextValue,
 } from './NodeContext'
-import { extractNodeTypesList, useGetFlow } from '@/engines/store'
+import { useGetFlow } from '@/engines/store'
+import { extractNodeTypesList } from '@/engines/store/utils'
 
 import cx from 'classnames'
 import styles from './NodePanel.module.css'

@@ -1,7 +1,5 @@
 import { type ReactElement, useMemo } from 'react'
-import SizedBox from '../SizedBox'
 import Grabber from './Grabber'
-import { STYLING } from '@/utils/styling'
 
 interface UseWrapUpArgs {
   direction: 'horizontal' | 'vertical'
@@ -11,11 +9,7 @@ interface UseWrapUpArgs {
 
 export function useWrapUp({ direction, panels, onDrag }: UseWrapUpArgs) {
   const grabber = useMemo(() => {
-    return (
-      <SizedBox width={STYLING.normalGap}>
-        <Grabber direction="horizontal" onDrag={onDrag}></Grabber>
-      </SizedBox>
-    )
+    return <Grabber direction="horizontal" onDrag={onDrag}></Grabber>
   }, [direction, onDrag])
 
   const wrapped = useMemo(() => {

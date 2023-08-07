@@ -1,36 +1,13 @@
-.TabBar {
-  /* layout */
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  /* outlook */
-  background-color: var(--grey-color-dark);
-}
-
-.Tab {
-  position: relative;
-  flex-shrink: 0;
-  padding: 0.4rem 1.2rem;
-  /* outlook */
-  background-color: transparent;
-  color: var(--white-color-dark);
-  /* meta */
-  cursor: pointer;
-  user-select: none;
-}
-
 .Active {
-  background-color: var(--grey-color-lightest);
-  color: var(--white-color);
+  @apply bg-slate-100;
 }
 
 .Active::before {
+  @apply h-1;
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 0.2rem;
   background-color: var(--primary-color);
 }

@@ -31,7 +31,7 @@ const Grabber: FC<GrabberProps> = ({ className, style, direction, onDrag }) => {
       style={style}
       {...bind()}
     >
-      <div className={styles.Grabber}></div>
+      <div className={cx('h-full w-full bg-blue-500', styles.Grabber)}></div>
     </div>
   )
 }

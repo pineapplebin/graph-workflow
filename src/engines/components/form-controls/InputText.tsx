@@ -1,11 +1,11 @@
+import type { ParamsFormComponentProps } from '@/engines/types'
 import { useCallback, type FC, type SyntheticEvent } from 'react'
 
-interface InputTextProps {
-  value?: string
-  onChange?: (val: string) => void
-}
-
-const InputText: FC<InputTextProps> = ({ value, onChange }) => {
+const InputText: FC<ParamsFormComponentProps<string>> = ({
+  value,
+  onChange,
+  disabled,
+}) => {
   const handleChange = useCallback(
     (ev: SyntheticEvent) => {
       const target = ev.target as HTMLInputElement
@@ -20,6 +20,7 @@ const InputText: FC<InputTextProps> = ({ value, onChange }) => {
       type="text"
       value={value}
       onChange={handleChange}
+      disabled={disabled}
     />
   )
 }

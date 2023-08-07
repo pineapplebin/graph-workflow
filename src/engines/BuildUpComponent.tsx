@@ -10,6 +10,8 @@ import type {
   DataInEngine,
   LimitedNodeProps,
   NodeComponentRunner,
+  OutputContentComponent,
+  ParamsFormComponent,
 } from './types'
 import { NodePanel, NodeVariable, NodeOutput } from './components/NodeStyling'
 import { useCustomNode } from './utils/hooks'
@@ -96,11 +98,11 @@ export type ParamsPortOption = {
   label: string
   typing: string
   unConnectable?: boolean
-  Body?: ComponentType<{ value?: any; onChange?: (val: any) => void }>
+  Body?: ParamsFormComponent
 }
 export type OutputPortOption<T extends Record<string, any>, O> = {
   typing: string
-  Body?: ComponentType<LimitedNodeProps<T, O>>
+  Body?: OutputContentComponent<T, O>
 }
 
 export interface BuildUpOptions<T extends Record<string, any>, O = any> {

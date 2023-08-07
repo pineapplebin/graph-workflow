@@ -3,7 +3,6 @@ import type { PropsWithStyling } from '../../common-types'
 import Container from '../Container'
 
 import cx from 'classnames'
-import styles from './Panel.module.css'
 
 export interface PanelProps extends PropsWithChildren, PropsWithStyling {
   initialSize?: number | string
@@ -13,7 +12,10 @@ export interface PanelProps extends PropsWithChildren, PropsWithStyling {
 
 const Panel: FC<PanelProps> = ({ className, style, children }) => {
   return (
-    <Container className={cx(className, styles.Panel)} style={style} flexGrow>
+    <Container
+      className={cx('h-full w-full flex-grow overflow-hidden', className)}
+      style={style}
+    >
       {children}
     </Container>
   )

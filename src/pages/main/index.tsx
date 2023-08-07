@@ -2,39 +2,41 @@ import { type FC, useEffect } from 'react'
 import { HSplitContainer, SplitContainerPanel } from '@/desktop-ui'
 import NodeList from './components/NodeList'
 import GraphEditor from './components/GraphEditor'
-import { IndividualFlowContext, useInitialFlow } from '@/engines/store'
+import { FlowStoreProvider, useInitialFlow } from '@/engines/store'
 
 const MainPage: FC = () => {
   const store = useInitialFlow({
-    nodes: [
-      {
-        id: 'ChooseFile',
-        type: 'ChooseFile',
-        position: { x: 50, y: 50 },
-        data: {},
+    nodeMap: {
+      ChooseFile: {
+        node: {
+          id: 'ChooseFile',
+          type: 'ChooseFile',
+          position: { x: 50, y: 50 },
+          data: {},
+        },
+        paramsEdges: {},
       },
-      {
-        id: 'ImagePreview',
-        type: 'ImagePreview',
-        position: { x: 550, y: 50 },
-        data: {},
+      ImagePreview: {
+        node: {
+          id: 'ImagePreview',
+          type: 'ImagePreview',
+          position: { x: 550, y: 50 },
+          data: {},
+        },
+        paramsEdges: {
+          image: 'ChooseFile',
+        },
       },
-      {
-        id: 'InputText',
-        type: 'InputText',
-        position: { x: 130, y: 350 },
-        data: {},
+      InputText: {
+        node: {
+          id: 'InputText',
+          type: 'InputText',
+          position: { x: 130, y: 350 },
+          data: {},
+        },
+        paramsEdges: {},
       },
-    ],
-    edges: [
-      {
-        source: 'ChooseFile',
-        sourceHandle: 'ChooseFile_output',
-        target: 'ImagePreview',
-        targetHandle: 'ImagePreview_image',
-        id: 'reactflow__edge-ChooseFileChooseFile_output-ImagePreviewImagePreview_image',
-      },
-    ],
+    },
   })
 
   useEffect(() => {
@@ -43,14 +45,14 @@ const MainPage: FC = () => {
   }, [])
 
   return (
-    <IndividualFlowContext.Provider value={store}>
+    <FlowStoreProvider value={store}>
       <HSplitContainer>
         <SplitContainerPanel minSize={300} initialSize={300}>
           <NodeList />
         </SplitContainerPanel>
         <GraphEditor />
       </HSplitContainer>
-    </IndividualFlowContext.Provider>
+    </FlowStoreProvider>
   )
 }
 

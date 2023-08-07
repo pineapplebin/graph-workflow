@@ -1,13 +1,11 @@
 import { type FC, type PropsWithChildren } from 'react'
 import type { PropsWithStyling } from '../../common-types'
-import { asFlexItem } from '../../hooks'
 
 import { useSplitChildren } from './split'
 import { useResizeChildren } from './resize'
+import { useWrapUp } from './wrap'
 
 import cx from 'classnames'
-import styles from './HSplitContainer.module.css'
-import { useWrapUp } from './wrap'
 
 export interface HSplitContainerProps
   extends PropsWithChildren,
@@ -34,7 +32,7 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
   return (
     <div
       ref={containerEl}
-      className={cx(className, styles.HSplitContainer)}
+      className={cx('flex h-full w-full !flex-row', className)}
       style={style}
     >
       {wrapped}
@@ -42,4 +40,4 @@ const HSplitContainer: FC<HSplitContainerProps> = ({
   )
 }
 
-export default asFlexItem(HSplitContainer)
+export default HSplitContainer

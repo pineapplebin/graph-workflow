@@ -1,5 +1,9 @@
 @import './theme-variables.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'BlackOpsOne';
   src: url('./assets/BlackOpsOne-Regular.ttf');
@@ -11,8 +15,8 @@
   line-height: 1.5;
 
   color-scheme: light dark;
-  color: var(--white-color);
-  background-color: #1b1f24;
+  /* color: var(--white-color); */
+  /* background-color: #1b1f24; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -2,6 +2,8 @@ import { type FC, type PropsWithChildren } from 'react'
 import { useMergeStyle } from '../../hooks'
 import type { PropsWithStyling } from '../../common-types'
 
+import cx from 'classnames'
+
 export interface SizedBoxProps extends PropsWithStyling, PropsWithChildren {
   width?: number | string
   height?: number | string
@@ -17,11 +19,10 @@ const SizedBox: FC<SizedBoxProps> = ({
   const mergedStyle = useMergeStyle(style, {
     width: width ?? undefined,
     height: height ?? undefined,
-    flexShrink: 0,
   })
 
   return (
-    <div className={className} style={mergedStyle}>
+    <div className={cx('shrink-0', className)} style={mergedStyle}>
       {children}
     </div>
   )

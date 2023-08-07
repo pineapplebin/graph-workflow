@@ -1,5 +1,4 @@
 import { type FC, type PropsWithChildren, type HTMLProps } from 'react'
-import { asFlexItem } from '../hooks'
 import type { PropsWithOnClick } from '../common-types'
 
 import cx from 'classnames'
@@ -39,4 +38,4 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
   )
 }
 
-export default asFlexItem(Button)
+export default Button
