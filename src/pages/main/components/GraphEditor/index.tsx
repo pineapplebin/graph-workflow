@@ -18,7 +18,6 @@ import { useNodeTypes } from '@/engines/node-types'
 import { useGetFlow } from '@/engines/store'
 
 import 'reactflow/dist/style.css'
-import styles from './index.module.css'
 
 const proOptions = { hideAttribution: true }
 
@@ -78,7 +77,7 @@ const GraphEditor: FC = () => {
   return (
     <ReactFlowProvider>
       <Panel>
-        <Container className={styles.GraphEditor}>
+        <Container className="h-full w-full bg-white">
           <ReactFlow
             nodeTypes={nodeTypes}
             nodes={nodes}

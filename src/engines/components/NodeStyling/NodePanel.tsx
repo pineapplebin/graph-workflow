@@ -13,10 +13,10 @@ import {
 } from './NodeContext'
 import { useGetFlow } from '@/engines/store'
 import { extractNodeTypesList } from '@/engines/store/utils'
+import type { LimitedNodeProps } from '../../types'
 
 import cx from 'classnames'
 import styles from './NodePanel.module.css'
-import type { LimitedNodeProps } from '../../types'
 
 export interface NodePanelProps<T extends Record<string, any>>
   extends PropsWithChildren,
@@ -88,16 +88,18 @@ function NodePanel<T extends Record<string, any>>({
         />
         <div
           className={cx(
+            'relative min-w-[24rem] rounded-md bg-slate-50',
             className,
-            styles.NodePanel,
             running && styles.Running,
-            error && styles.Error,
-            limitedNode?.selected && styles.Selected,
+            error && '!outline-4 outline-err',
+            limitedNode?.selected && '!outline-4 outline-hl',
           )}
           style={style}
         >
-          <div className={styles.Header}>{limitedNode?.type}</div>
-          <div className={styles.Content}>{children}</div>
+          <div className="rounded-t-md bg-slate-100 p-3 font-mono font-bold text-purple-500">
+            {limitedNode?.type}
+          </div>
+          <div className="relative border-t border-t-slate-300">{children}</div>
         </div>
       </NodeFormValueContext.Provider>
     </NodeContext.Provider>

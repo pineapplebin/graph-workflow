@@ -19,6 +19,7 @@ const NodeList: FC = () => {
     reducer: state.reducer,
   }))
 
+  const tabBarProps = TabBar.useTabState(0)
   const tabs = useMemo<TabOption[]>(() => {
     return [
       { key: 0, label: '节点列表' },
@@ -42,17 +43,17 @@ const NodeList: FC = () => {
 
   return (
     <Column>
-      <TabBar current={0} tabs={tabs} />
+      <TabBar tabs={tabs} {...tabBarProps} />
       <Panel className="p-2">
         <Column>
           <Row className="!h-auto">
-            <Button color="dark">
+            <Button>
               <Icon type="plus" />
             </Button>
           </Row>
           <SizedBox className="h-common-gap" />
           <Container
-            className="h-full w-full rounded bg-slate-200 p-3 focus:outline-hl focus-visible:outline-hl"
+            className="h-full w-full rounded-md bg-slate-200 p-3 focus:outline-hl focus-visible:outline-hl"
             scrollable
             tabIndex={0}
           >

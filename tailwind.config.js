@@ -9,6 +9,7 @@ function addCustomUtilities({ addUtilities }) {
     '.w-common-gap': { width: 'var(--common-gap)' },
     '.h-common-gap': { height: 'var(--common-gap)' },
     '.outline-hl': { '@apply outline outline-blue-500 outline-2': {} },
+    '.outline-err': { '@apply outline outline-red-500 outline-2': {} },
     '.transition-bg': { 'transition-property': 'background-color' },
   })
 }

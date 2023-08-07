@@ -15,8 +15,6 @@ import { TargetHandle } from './Handle'
 import { Row, SizedBox, Container } from '@/desktop-ui'
 import { Typing } from './Typing'
 
-import styles from './NodeVariable.module.css'
-
 export interface NodeVariableProps extends PropsWithChildren {
   name: string
   label: string
@@ -63,16 +61,20 @@ function NodeVariable({
   )
 
   return (
-    <div className={styles.NodeVariable}>
-      <div className={styles.Label}>
+    <div className="relative">
+      <div className="relative p-3">
         {!unConnectable && <TargetHandle ref={handleRef} id={fieldId} />}
         <Row>
-          <label htmlFor={fieldId}>{label}</label>
-          <SizedBox width="0.5rem" />
+          <label htmlFor={fieldId} className="font-bold">
+            {label}
+          </label>
+          <SizedBox className="w-[0.5rem]" />
           <Typing typing={typing} missing={!value && !node?.data.output} />
         </Row>
       </div>
-      <Container className={styles.InputControl}>{fieldControl}</Container>
+      <Container className="relative rounded-md bg-slate-100 p-3">
+        {fieldControl}
+      </Container>
     </div>
   )
 }

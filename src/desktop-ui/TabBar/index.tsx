@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { useState, type FC, useCallback } from 'react'
 import type { PropsWithStyling } from '../common-types'
 
 import cx from 'classnames'
@@ -11,17 +11,26 @@ export interface TabOption {
 
 export interface TabBarProps extends PropsWithStyling {
   tabs: TabOption[]
-  current?: string | number
+  current?: string | number | null
   onChange?: (key: string | number) => void
 }
 
-const TabBar: FC<TabBarProps> = ({
-  className,
-  style,
-  current,
-  onChange,
-  tabs,
-}) => {
+type TTabBar = FC<TabBarProps> & {
+  useTabState: typeof useTabState
+}
+
+function useTabState(initialValue?: string | number) {
+  const [tab, setTab] = useState(initialValue ?? null)
+  const handleChange = useCallback((key: string | number) => {
+    setTab(key)
+  }, [])
+  return {
+    current: tab,
+    onChange: handleChange,
+  }
+}
+
+const TabBar: TTabBar = ({ className, style, current, onChange, tabs }) => {
   return (
     <div
       className={cx('flex w-full items-center justify-start', className)}
@@ -33,7 +42,7 @@ const TabBar: FC<TabBarProps> = ({
           className={cx(
             'relative shrink-0 cursor-pointer select-none px-5 py-2 duration-200 ease-in-out transition-bg',
             current === opt.key && styles.Active,
-            current !== opt.key && 'hover:bg-slate-50',
+            current !== opt.key && 'text-gray-500 hover:bg-slate-50',
           )}
           onClick={() => onChange?.(opt.key)}
         >
@@ -43,5 +52,7 @@ const TabBar: FC<TabBarProps> = ({
     </div>
   )
 }
+
+TabBar.useTabState = useTabState
 
 export default TabBar

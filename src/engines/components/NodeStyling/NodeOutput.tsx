@@ -12,8 +12,6 @@ import { Typing } from './Typing'
 import { SourceHandle } from './Handle'
 import { NodeContext } from './NodeContext'
 
-import styles from './NodeOutput.module.css'
-
 export interface NodeOutputProps extends PropsWithChildren {
   typing: string
 }
@@ -39,24 +37,26 @@ const NodeOutput: FC<NodeOutputProps> = ({ typing, children }) => {
       const display = !error ? (
         children
       ) : (
-        <span className={styles.ErrorHint}>{error}</span>
+        <span className="whitespace-pre-wrap text-left text-red-500">
+          {error}
+        </span>
       )
-      return <Container className={styles.Result}>{display}</Container>
+      return <Container className="p-3">{display}</Container>
     }
     return null
   }, [children, error])
 
   return (
-    <div className={styles.NodeOutput}>
-      <div className={styles.Label}>
+    <div className="relative">
+      <div className="relative p-3">
         <Row>
-          <label>输出</label>
-          <SizedBox width="0.5rem" />
+          <label className="font-bold">输出</label>
+          <SizedBox className="w-[0.5rem]" />
           <Typing typing={typing} missing={!node?.data.output} />
         </Row>
         <SourceHandle ref={handleRef} id={handleId} />
       </div>
-      {content}
+      <div className="rounded-b-md bg-slate-100">{content}</div>
     </div>
   )
 }

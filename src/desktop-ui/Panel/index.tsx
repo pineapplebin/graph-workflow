@@ -8,7 +8,7 @@ export interface PanelProps extends PropsWithChildren, PropsWithStyling {}
 const Panel: FC<PanelProps> = ({ className, style, children }) => {
   return (
     <div
-      className={cx('h-full w-full rounded bg-slate-100', className)}
+      className={cx('h-full w-full rounded-md bg-slate-100', className)}
       style={style}
     >
       {children}

@@ -15,7 +15,7 @@ export const Typing: FC<TypingProps> = ({ typing, missing }) => {
   }, [typing])
 
   return (
-    <Row className={cx(styles.Typing, missing && styles.Missing)}>
+    <Row className={cx(styles.Typing, missing && 'opacity-50')}>
       <span>{content}</span>
     </Row>
   )

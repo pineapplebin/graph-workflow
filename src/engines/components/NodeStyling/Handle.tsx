@@ -1,12 +1,8 @@
 import { forwardRef } from 'react'
 import { Handle, type HandleProps, Position } from 'reactflow'
+import cx from 'classnames'
 
 type SourceHandleProps = Omit<HandleProps, 'type' | 'position' | 'style'> & {}
-
-const HANDLE_STYLE: React.CSSProperties = {
-  width: '1rem',
-  height: '1rem',
-}
 
 export const SourceHandle = forwardRef<HTMLDivElement, SourceHandleProps>(
   ({ ...rest }, ref) => {
@@ -15,7 +11,7 @@ export const SourceHandle = forwardRef<HTMLDivElement, SourceHandleProps>(
         ref={ref}
         type="source"
         position={Position.Right}
-        style={HANDLE_STYLE}
+        className={cx('h-4 w-4 bg-slate-500')}
         {...rest}
       />
     )
@@ -29,7 +25,7 @@ export const TargetHandle = forwardRef<HTMLDivElement, SourceHandleProps>(
         ref={ref}
         type="target"
         position={Position.Left}
-        style={HANDLE_STYLE}
+        className={cx('h-4 w-4 bg-slate-500')}
         {...rest}
       />
     )

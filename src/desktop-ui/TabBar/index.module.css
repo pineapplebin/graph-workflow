@@ -3,11 +3,6 @@
 }
 
 .Active::before {
-  @apply h-1;
+  @apply absolute left-0 right-0 top-0 h-1 bg-blue-500;
   content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--primary-color);
 }
