@@ -3,7 +3,6 @@ import { Container, Row } from '@/desktop-ui'
 import type { Node } from 'reactflow'
 
 import cx from 'classnames'
-import styles from './NodeListItem.module.css'
 
 export interface NodeListItemProps {
   node: Node
@@ -16,7 +15,6 @@ const NodeListItem: FC<NodeListItemProps> = ({ node, selected, onClick }) => {
     <Container
       className={cx(
         'rounded-md px-4 py-2 duration-200 ease-in-out transition-bg',
-        styles.NodeListItem,
         selected && 'bg-gray-300',
         !selected && 'hover:bg-gray-300',
       )}

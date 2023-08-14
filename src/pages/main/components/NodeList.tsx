@@ -14,9 +14,9 @@ import { useGetFlow } from '@/engines/store'
 import NodeListItem from './NodeListItem'
 
 const NodeList: FC = () => {
-  const { nodes, reducer } = useGetFlow((state) => ({
+  const { nodes, graphData } = useGetFlow((state) => ({
     nodes: state.nodes,
-    reducer: state.reducer,
+    graphData: state.graphData,
   }))
 
   const tabBarProps = TabBar.useTabState(0)
@@ -29,16 +29,16 @@ const NodeList: FC = () => {
 
   const handleClickItem = useCallback(
     (nodeId: string) => {
-      reducer((set) => {
-        set({
-          nodes: nodes.map((node) => ({
-            ...node,
-            selected: node.id === nodeId,
-          })),
-        })
-      })
+      // 选中点击的节点，其他节点取消选中
+      graphData.updateNodesByChanges(
+        graphData.api.get().nodes.map((node) => ({
+          type: 'select',
+          id: node.id,
+          selected: node.id === nodeId,
+        })),
+      )
     },
-    [nodes, reducer],
+    [graphData],
   )
 
   return (

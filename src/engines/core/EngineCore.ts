@@ -1,5 +1,5 @@
 import { type StoreApi } from 'zustand'
-import { type FlowDataState } from '../store'
+import { type FlowDataState } from '../store/types'
 import { Task } from './Task'
 import { TaskStack } from './TaskStack'
 import { type EngineNode } from '../types'
@@ -13,20 +13,16 @@ class EngineCore {
   }
 
   async startRun(nodeId: string) {
-    const { nodes, edges } = this.store.getState()
+    const { nodes, edges, graphData } = this.store.getState()
     const node = nodes.find((node) => node.id === nodeId)
     if (!node) {
       throw new Error(`node not found: ${nodeId}`)
     }
 
     // 清空所有节点的 output
-    this.store.setState({
-      nodes: nodes.map((node) => ({
-        ...node,
-        selected: false,
-        data: { ...node.data, output: undefined },
-      })),
-    })
+    graphData.updateNodesByChanges(
+      nodes.map((node) => ({ type: 'select', selected: false, id: node.id })),
+    )
 
     const taskStack = this.makeTaskStack(node, { nodes, edges })
 

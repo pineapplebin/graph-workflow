@@ -1,11 +1,11 @@
 import {
-  type DependencyList,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
   useReducer,
+  type RefObject,
 } from 'react'
 import { useNodes, type Node } from 'reactflow'
 import { useMemoizedFn } from 'ahooks'
@@ -19,43 +19,21 @@ import type {
 import { sleep } from './tools'
 
 /**
- * 在 custom node 中获取当前 node
- */
-export function useCurrentNode(nodeId: string | null): {
-  node: Node<DataInEngine> | null
-  nodeId: string | null
-} {
-  const nodes = useNodes()
-
-  const node = useMemo(() => {
-    return nodes.find((node) => node.id === nodeId) as
-      | Node<DataInEngine>
-      | undefined
-  }, [nodeId, nodes])
-
-  return {
-    node: node || null,
-    nodeId,
-  }
-}
-
-/**
  * 将当前组件引用注册到 flow data 中
  */
 export function useRegisterNodeComponent(
   id: string | null,
   handler: NodeComponentHandler,
-  deps: DependencyList,
+  updateRef: (ref: RefObject<NodeComponentHandler> | null) => void,
 ) {
   const ref = useRef<NodeComponentHandler>(null)
-  useImperativeHandle(ref, () => handler, deps)
+  useImperativeHandle(ref, () => handler, [])
 
-  const updateNodeData = useGetFlow((state) => state.updateNodeData)
   useEffect(() => {
     if (!id) return
-    updateNodeData(id, { ref })
+    updateRef(ref)
     return () => {
-      updateNodeData(id, { ref: null })
+      updateRef(null)
     }
   }, [])
 
@@ -131,8 +109,8 @@ export function useCustomNode<T extends Record<string, any>>(
   { runner, initialFormValue }: UseCustomNodeOptions<T>,
 ) {
   // 获取当前节点
-  const { updateNodeData } = useGetFlow((state) => ({
-    updateNodeData: state.updateNodeData,
+  const { graphData } = useGetFlow((state) => ({
+    graphData: state.graphData,
   }))
 
   const { formValue, dispatchFormValueUpdate } =
@@ -144,7 +122,7 @@ export function useCustomNode<T extends Record<string, any>>(
     const _helpers = {
       updateCurrentNodeData: (data: DataInEngine) => {
         if (nodeId) {
-          updateNodeData(nodeId, data)
+          graphData.updateNodeData(nodeId, data)
         }
       },
       updateErrorMessage(msg: string | null) {
@@ -155,12 +133,12 @@ export function useCustomNode<T extends Record<string, any>>(
         // 清空错误信息、输出数据
         setErrorMsg(null)
         if (nodeId) {
-          updateNodeData(nodeId, { output: undefined })
+          graphData.updateNodeData(nodeId, { output: undefined })
         }
       },
     }
     return _helpers
-  }, [nodeId, updateNodeData, dispatchFormValueUpdate])
+  }, [nodeId, graphData, dispatchFormValueUpdate])
 
   // 包装 run 逻辑
   const { run, running } = useRunner<T>(runner, helpers, formValue)
@@ -168,7 +146,9 @@ export function useCustomNode<T extends Record<string, any>>(
   const ref = useRegisterNodeComponent(
     nodeId,
     { run: run as NodeComponentHandler['run'] },
-    [],
+    (ref: RefObject<NodeComponentHandler> | null) => {
+      helpers.updateCurrentNodeData({ ref: ref ?? undefined })
+    },
   )
 
   return {

@@ -12,7 +12,6 @@ import {
   type NodeContextValue,
 } from './NodeContext'
 import { useGetFlow } from '@/engines/store'
-import { extractNodeTypesList } from '@/engines/store/utils'
 import type { LimitedNodeProps } from '../../types'
 
 import cx from 'classnames'
@@ -48,30 +47,20 @@ function NodePanel<T extends Record<string, any>>({
     return { node: limitedNode, nodeId, error: error ?? null }
   }, [limitedNode])
 
-  const { handleStartRun, systemRunning, reducer } = useGetFlow((state) => ({
+  const { handleStartRun, systemRunning, graphData } = useGetFlow((state) => ({
     handleStartRun: state.startRun,
     systemRunning: state.systemRunning,
-    reducer: state.reducer,
+    graphData: state.graphData,
   }))
 
   /**
    * 删除节点
-   * 1. 删除节点
-   * 2. 删除节点的所有边
-   * 3. 更新节点类型列表
    */
   const handleRemove = useCallback(() => {
-    reducer((set, get) => {
-      const newNodes = get().nodes.filter((node) => node.id !== nodeId)
-      set({
-        nodes: newNodes,
-        edges: get().edges.filter(
-          (edge) => !(edge.source === nodeId || edge.target === nodeId),
-        ),
-        nodeTypesList: extractNodeTypesList(newNodes),
-      })
-    })
-  }, [nodeId])
+    if (nodeId) {
+      graphData.removeNode(nodeId)
+    }
+  }, [nodeId, graphData])
 
   const formValueContextValue = useMemo(() => {
     return { value: formValue ?? {}, onChange: onChange ?? (() => {}) }

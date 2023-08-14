@@ -6,43 +6,33 @@ import { FlowStoreProvider, useInitialFlow } from '@/engines/store'
 
 const MainPage: FC = () => {
   const store = useInitialFlow({
-    nodeMap: {
-      ChooseFile: {
-        node: {
-          id: 'ChooseFile',
-          type: 'ChooseFile',
-          position: { x: 50, y: 50 },
-          data: {},
-        },
-        paramsEdges: {},
+    nodes: [
+      {
+        id: 'ChooseFile',
+        type: 'ChooseFile',
+        position: { x: 50, y: 50 },
+        data: {},
       },
-      ImagePreview: {
-        node: {
-          id: 'ImagePreview',
-          type: 'ImagePreview',
-          position: { x: 550, y: 50 },
-          data: {},
-        },
-        paramsEdges: {
-          image: 'ChooseFile',
-        },
+      {
+        id: 'ImagePreview',
+        type: 'ImagePreview',
+        position: { x: 550, y: 50 },
+        data: {},
       },
-      InputText: {
-        node: {
-          id: 'InputText',
-          type: 'InputText',
-          position: { x: 130, y: 350 },
-          data: {},
-        },
-        paramsEdges: {},
+      {
+        id: 'InputText',
+        type: 'InputText',
+        position: { x: 130, y: 350 },
+        data: {},
       },
-    },
+    ],
+    edges: [],
   })
 
   useEffect(() => {
     // @ts-ignore
     window.store = store
-  }, [])
+  }, [store])
 
   return (
     <FlowStoreProvider value={store}>

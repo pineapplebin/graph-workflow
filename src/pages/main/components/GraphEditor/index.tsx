@@ -5,14 +5,10 @@ import {
   Controls,
   ReactFlow,
   ReactFlowProvider,
-  addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
-  updateEdge,
   type Connection,
   type Edge,
-  type EdgeChange,
   type NodeChange,
+  type EdgeChange,
 } from 'reactflow'
 import { useNodeTypes } from '@/engines/node-types'
 import { useGetFlow } from '@/engines/store'
@@ -22,57 +18,50 @@ import 'reactflow/dist/style.css'
 const proOptions = { hideAttribution: true }
 
 const GraphEditor: FC = () => {
-  const { nodes, edges, nodeTypesList, reducer } = useGetFlow((state) => ({
+  const { nodes, edges, nodeTypesList, graphData } = useGetFlow((state) => ({
     nodes: state.nodes,
     edges: state.edges,
     nodeTypesList: state.nodeTypesList,
-    reducer: state.reducer,
+    graphData: state.graphData,
   }))
   const nodeTypes = useNodeTypes(nodeTypesList)
 
   const edgeUpdateSuccessful = useRef(false)
   const fns = useMemo(() => {
     return {
-      onNodesChange: (changes: NodeChange[]) =>
-        reducer((set, get) => {
-          set({ nodes: applyNodeChanges(changes, get().nodes) })
-        }),
-      onEdgesChange: (changes: EdgeChange[]) =>
-        reducer((set, get) => {
-          set({ edges: applyEdgeChanges(changes, get().edges) })
-        }),
-      onConnect: (params: Edge | Connection) =>
-        reducer((set, get) => {
-          const edges = get().edges
-          // 禁止同一个节点相互连接
-          if (params.target && params.target === params.source) {
-            return
-          }
-          // 禁止一个端口连接多次
-          if (params.target && edges.find((e) => e.target === params.target)) {
-            return
-          }
-          set({ edges: addEdge(params, edges) })
-        }),
+      onNodesChange: (changes: NodeChange[]) => {
+        return graphData.updateNodesByChanges(changes)
+      },
+      onEdgesChange: (changes: EdgeChange[]) => {
+        return graphData.updateEdgesByChanges(changes)
+      },
+      onConnect: (params: Edge | Connection) => {
+        const edges = graphData.api.get().edges
+        // 禁止同一个节点相互连接
+        if (params.target && params.target === params.source) {
+          return
+        }
+        // 禁止一个端口连接多次
+        if (params.target && edges.find((e) => e.target === params.target)) {
+          return
+        }
+        graphData.updateConnection(null, params)
+      },
       onEdgeUpdateStart: () => {
         edgeUpdateSuccessful.current = false
       },
       onEdgeUpdate: (oldEdge: Edge, newConnection: Connection) => {
         edgeUpdateSuccessful.current = true
-        reducer((set, get) => {
-          set({ edges: updateEdge(oldEdge, newConnection, get().edges) })
-        })
+        graphData.updateConnection(oldEdge, newConnection)
       },
       onEdgeUpdateEnd: (_: any, edge: Edge) => {
-        reducer((set, get) => {
-          if (!edgeUpdateSuccessful.current) {
-            set({ edges: get().edges.filter((e) => e.id !== edge.id) })
-          }
-        })
+        if (!edgeUpdateSuccessful.current) {
+          graphData.removeEdge(edge)
+        }
         edgeUpdateSuccessful.current = true
       },
     }
-  }, [reducer])
+  }, [graphData])
 
   return (
     <ReactFlowProvider>

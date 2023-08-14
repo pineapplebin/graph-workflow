@@ -2,7 +2,8 @@ import { lazy, useMemo, type ComponentType, Suspense } from 'react'
 import type { NodeProps, NodeTypes } from 'reactflow'
 
 /**
- * 1. 动态加载节点类型
+ * 动态加载节点类型
+ * 注意 nodeTypesList 需要去重排序
  */
 export function useNodeTypes(nodeTypesList: string[]): NodeTypes {
   return useMemo(() => {
@@ -10,7 +11,7 @@ export function useNodeTypes(nodeTypesList: string[]): NodeTypes {
       acc[type] = CustomNodeComponent
       return acc
     }, {} as NodeTypes)
-  }, [nodeTypesList])
+  }, [...nodeTypesList])
 }
 
 const CustomNodeComponent: ComponentType<NodeProps> = (props) => {

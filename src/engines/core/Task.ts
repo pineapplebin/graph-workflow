@@ -1,11 +1,14 @@
 import type { StoreApi } from 'zustand'
 import type { Edge } from 'reactflow'
 import type { EngineNode } from '../types'
-import type { FlowDataState } from '../store'
+import type { FlowDataState } from '../store/types'
 import { AbortError } from './tools'
 
 export class Task {
-  constructor(public node: EngineNode, public edges: Edge[]) {}
+  constructor(
+    public node: EngineNode,
+    public edges: Edge[],
+  ) {}
 
   toString() {
     return `${this.node.type}(${this.node.id})`
@@ -24,10 +27,13 @@ export class Task {
       return { name: paramName, value: node.data.output ?? null }
     })
 
-    const params = paramList.reduce((acc, { name, value }) => {
-      acc[name] = value
-      return acc
-    }, {} as Record<string, any>)
+    const params = paramList.reduce(
+      (acc, { name, value }) => {
+        acc[name] = value
+        return acc
+      },
+      {} as Record<string, any>,
+    )
 
     const { ref } = this.node.data
     try {

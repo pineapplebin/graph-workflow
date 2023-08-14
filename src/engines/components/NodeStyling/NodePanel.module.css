@@ -1,7 +1,7 @@
 .Running::before {
   @apply absolute inset-0;
   content: '';
-  box-shadow: 0 0 0.8rem 0.2rem var(--primary-color);
+  box-shadow: 0 0 0.8rem 0.2rem theme(colors.blue.500);
   animation: shinning 0.4s ease-in-out infinite alternate;
 }
 
