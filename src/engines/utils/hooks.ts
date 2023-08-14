@@ -7,7 +7,6 @@ import {
   useReducer,
   type RefObject,
 } from 'react'
-import { useNodes, type Node } from 'reactflow'
 import { useMemoizedFn } from 'ahooks'
 import { useGetFlow } from '../store'
 import type {

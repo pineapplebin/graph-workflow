@@ -55,8 +55,11 @@ function NodeVariable({
   )
 
   const value = formValue[label]
+  const disabled = useMemo(() => {
+    return !!node?.data.paramsEdges?.[name]
+  }, [name, node?.data.paramsEdges?.[name]])
   const fieldControl = useInjectChild(
-    { id: fieldId, value, onChange: handleChange },
+    { id: fieldId, value, onChange: handleChange, disabled },
     children,
   )
 
@@ -81,9 +84,10 @@ function NodeVariable({
 
 function useInjectChild(
   fieldProps: {
-    value?: any
     id?: string
+    value?: any
     onChange?: (value: any) => void
+    disabled?: boolean
   },
   children: PropsWithChildren['children'],
 ) {
@@ -98,7 +102,7 @@ function useInjectChild(
 
     const newChild = cloneElement(child, { ...fieldProps })
     return newChild
-  }, [children, fieldProps.value, fieldProps.onChange])
+  }, [children, fieldProps.value, fieldProps.onChange, fieldProps.disabled])
 }
 
 export default NodeVariable

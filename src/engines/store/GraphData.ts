@@ -234,7 +234,7 @@ export class GraphData {
    */
   removeEdge(edge: Edge) {
     // 移除数据
-    const newEdges = this._edges.filter((e) => e.id === edge.id)
+    const newEdges = this._edges.filter((e) => e.id !== edge.id)
 
     // 更新节点 data
     const change: CustomChange = {

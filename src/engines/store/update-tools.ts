@@ -62,7 +62,7 @@ export function applyRemoveEdgeChange(
   const { paramsEdges } = newNode.data
 
   const [_, params] = change.data.targetHandle!.split('_') // id_params 格式
-  if (paramsEdges?.[params] === change.id) {
+  if (paramsEdges?.[params] === change.data.source) {
     delete paramsEdges[params]
   }
 
