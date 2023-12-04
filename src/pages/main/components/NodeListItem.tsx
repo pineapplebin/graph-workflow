@@ -14,7 +14,7 @@ const NodeListItem: FC<NodeListItemProps> = ({ node, selected, onClick }) => {
   return (
     <Container
       className={cx(
-        'rounded-md px-4 py-2 duration-200 ease-in-out transition-bg',
+        'cursor-pointer rounded-md px-4 py-2 duration-200 ease-in-out transition-bg',
         selected && 'bg-gray-300',
         !selected && 'hover:bg-gray-300',
       )}

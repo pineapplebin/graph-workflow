@@ -8,6 +8,7 @@ import Row from './layouts/Row'
 import SizedBox from './layouts/SizedBox'
 import Container from './layouts/Container'
 import { HSplitContainer, SplitContainerPanel } from './layouts/SplitContainer'
+import PopupModal from './Modal/PopupModal'
 
 export {
   Icon,
@@ -20,7 +21,7 @@ export {
   Container,
   HSplitContainer,
   SplitContainerPanel,
+  PopupModal,
 }
 export * from './hooks'
-export * from './enums'
 export type * from './common-types'

@@ -13,7 +13,11 @@ import type { TabOption } from '@/desktop-ui/TabBar'
 import { useGetFlow } from '@/engines/store'
 import NodeListItem from './NodeListItem'
 
-const NodeList: FC = () => {
+export interface NodeListProps {
+  onClickAdd?: () => void
+}
+
+const NodeList: FC<NodeListProps> = ({ onClickAdd }) => {
   const { nodes, graphData } = useGetFlow((state) => ({
     nodes: state.nodes,
     graphData: state.graphData,
@@ -47,7 +51,7 @@ const NodeList: FC = () => {
       <Panel className="p-2">
         <Column>
           <Row className="!h-auto">
-            <Button>
+            <Button onClick={onClickAdd}>
               <Icon type="plus" />
             </Button>
           </Row>

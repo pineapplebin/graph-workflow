@@ -49,6 +49,11 @@ export function useInitialFlow(initialData: {
    */
   useEffect(() => {
     engine.store = store
+
+    // for debug
+    // @ts-ignore
+    window.store = store
+
     return () => {
       // store.getState().graphData.destroy()
       engine.destroy()

@@ -1,8 +1,9 @@
-import { type FC, useEffect } from 'react'
-import { HSplitContainer, SplitContainerPanel } from '@/desktop-ui'
+import { type FC } from 'react'
+import { HSplitContainer, PopupModal, SplitContainerPanel } from '@/desktop-ui'
+import { FlowStoreProvider, useInitialFlow } from '@/engines/store'
 import NodeList from './components/NodeList'
 import GraphEditor from './components/GraphEditor'
-import { FlowStoreProvider, useInitialFlow } from '@/engines/store'
+import AddNodeModal from './components/AddNodeModal'
 
 const MainPage: FC = () => {
   const store = useInitialFlow({
@@ -29,19 +30,19 @@ const MainPage: FC = () => {
     edges: [],
   })
 
-  useEffect(() => {
-    // @ts-ignore
-    window.store = store
-  }, [store])
+  const { toggle, modal } = PopupModal.build({
+    children: <AddNodeModal />,
+  })
 
   return (
     <FlowStoreProvider value={store}>
       <HSplitContainer>
         <SplitContainerPanel minSize={300} initialSize={300}>
-          <NodeList />
+          <NodeList onClickAdd={toggle} />
         </SplitContainerPanel>
         <GraphEditor />
       </HSplitContainer>
+      {modal}
     </FlowStoreProvider>
   )
 }
